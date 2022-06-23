@@ -16,7 +16,7 @@ public class UI_Ice : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        CombatManager.targetIce = outline.enabled ? null : ice;
+        ServerManager.currentIce = outline.enabled ? null : ice;
         outline.enabled = !outline.enabled; 
 
         foreach (UI_Ice uiICE in FindObjectsOfType<UI_Ice>().Where(ui => ui != this))
@@ -32,8 +32,8 @@ public class UI_Ice : MonoBehaviour, IPointerClickHandler
     public void Setup(ICE ice)
     {
         this.ice = ice;
-        iceName.text = ice.name;
-        gameObject.name = ice.name; 
+        iceName.text = ice.data.name;
+        gameObject.name = ice.data.name; 
 
         foreach (Transform t in bitPanel.transform)
             Destroy(t.gameObject);

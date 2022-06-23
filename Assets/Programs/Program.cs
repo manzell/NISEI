@@ -10,7 +10,7 @@ public class Program
     public ProgramData data; 
     public Rig rig;
 
-    public ICE targetIce => CombatManager.targetIce; 
+    public ICE targetIce => ServerManager.currentIce; 
 
     public Program(ProgramData data)
     {

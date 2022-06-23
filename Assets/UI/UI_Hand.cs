@@ -13,7 +13,7 @@ public class UI_Hand : MonoBehaviour
     private void Start()
     {
         rig.cardDrawEvent.AddListener(OnCardDraw);
-        CombatManager.turnStartEvent.AddListener(UpdateButton); 
+        ServerManager.turnStartEvent.AddListener(UpdateButton); 
     }
 
     void OnCardDraw(Card card)
@@ -25,6 +25,6 @@ public class UI_Hand : MonoBehaviour
     void UpdateButton()
     {
         button.GetComponentInChildren<TextMeshProUGUI>().text = "|RELOAD >";
-        CombatManager.turnStartEvent.RemoveListener(UpdateButton);
+        ServerManager.turnStartEvent.RemoveListener(UpdateButton);
     }
 }

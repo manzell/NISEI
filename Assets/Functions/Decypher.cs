@@ -46,11 +46,11 @@ public class Decypher : ProgramBehavior
 
     public override Executable GetExecutable(Program program)
     {
-        ICE ice = CombatManager.targetIce; 
+        ICE ice = ServerManager.currentIce; 
 
         Executable exe = new Executable(executable => Execute(ice, program, executable));
         exe.cycles = new intRef(program.data.cycleCost);
-        exe.name = $"{program.data.name}({ice.name})";
+        exe.name = $"{program.data.name}({ice.data.name})";
         exe.description = $"Cycles: {exe.cycles}"; 
 
         return exe; 

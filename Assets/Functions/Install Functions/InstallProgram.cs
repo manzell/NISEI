@@ -6,5 +6,7 @@ using UnityEngine;
 public class InstallProgram : PlayBehavior
 {
     [SerializeField] ProgramData programData;
-    public override void Do(Rig rig, Card card) => rig.Install(programData);
+    public override void Do(Rig rig, Card card) => rig.InstallProgram(programData);
 }
+
+

@@ -12,7 +12,7 @@ public class Optimize : PlayBehavior
 
         if(exe != null)
         {
-            Debug.Log($"|OPTIMIZE> {card.cardData.name} reducing {exe.name} Cycle Cost by {exe.cycles.Value / 2}");
+            Debug.Log($"|OPTIMIZE> {card.data.name} reducing {exe.name} Cycle Cost by {exe.cycles.Value / 2}");
             exe.cycles.Value = exe.cycles.Value / 2;
             exe.updateExe.Invoke(); 
         }

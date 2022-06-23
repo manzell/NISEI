@@ -13,19 +13,19 @@ public class intRef
 {
     public bool constant;
     public int constValue;
-    public IntValue intValue;
+    public IntValue intValue = new IntValue();
 
     public List<Modifier> modifiers = new List<Modifier>();
-
-    int baseValue
-    {
-        get { return constant ? constValue : intValue.Value; }
-        set { intValue.Value = value; }
-    }
 
     public int Value
     {
         get { return baseValue + modification; }
+        set { intValue.Value = value; }
+    }
+
+    int baseValue
+    {
+        get { return constant ? constValue : intValue.Value; }
         set { intValue.Value = value; }
     }
 
@@ -57,6 +57,10 @@ public class intRef
         intValue = i; 
     }
 
-    public static implicit operator int(intRef i) => i.Value; 
-    public static implicit operator string(intRef s) => s.Value.ToString(); 
+    public static implicit operator int(intRef i) { return i.Value; }
+    public static explicit operator string(intRef s) => s.Value.ToString();
+    public static intRef operator +(intRef a, intRef b) { a.Value += b.Value; return a; }
+    public static intRef operator +(intRef a, int b) { a.Value += b; return a; }
+    public static intRef operator -(intRef a, intRef b) { a.Value -= b.Value; return a; }
+    public static intRef operator -(intRef a, int b) { a.Value -= b; return a; }
 }

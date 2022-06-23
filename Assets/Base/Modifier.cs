@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Modifier : MonoBehaviour
+[System.Serializable]
+public class Modifier
 {
     public enum ModifierType { Flat, Multiplicitave }
 

@@ -11,8 +11,8 @@ public class Overclock : PlayBehavior
     {
         int speedEnhancement = (int)(rig.clockSpeed * speedIncrease.baseValue);
         rig.clockSpeed += speedEnhancement;
-        CombatManager.turnEndEvent.AddListener(() => rig.clockSpeed -= speedEnhancement);
+        ServerManager.turnEndEvent.AddListener(() => rig.clockSpeed -= speedEnhancement);
 
-        Debug.Log($"Overclock[{card.name}] increasing available cycles by {speedEnhancement} qHz");
+        Debug.Log($"Overclock[{card.data.name}] increasing available cycles by {speedEnhancement} qHz");
     }
 }

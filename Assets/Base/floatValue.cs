@@ -60,4 +60,6 @@ public class floatRef
 
     public static implicit operator float(floatRef f) => f.baseValue;
     public static implicit operator string(floatRef f) => f.baseValue .ToString("#.##");
+    public static floatRef operator +(floatRef a, floatRef b) { a.Value += b.Value; return a; }
+    public static floatRef operator -(floatRef a, floatRef b) { a.Value -= b.Value; return a; }
 }

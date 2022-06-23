@@ -18,9 +18,8 @@ public class UI_Executable : MonoBehaviour
 
     public void Setup(Executable exe)
     {
-        this.exe = exe; 
-        executionName.text = exe.name;
-        executionDescription.text = exe.description; 
+        this.exe = exe;
+        exe.updateExe.AddListener(UpdateText); 
 
         switch (exe.program?.data.programType)
         {
@@ -34,5 +33,11 @@ public class UI_Executable : MonoBehaviour
                 outline.effectColor = new Color(.8f, 0f, .8f);
                 break;
         }
+    }
+
+    public void UpdateText()
+    {
+        executionName.text = exe.name;
+        executionDescription.text = exe.description;
     }
 }

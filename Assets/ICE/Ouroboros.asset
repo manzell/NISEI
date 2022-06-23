@@ -21,45 +21,75 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes:
-    - Name: bitTypeWeights
+    - Name: subroutines
       Entry: 7
-      Data: 0|System.Collections.Generic.Dictionary`2[[Bit, Assembly-CSharp],[System.Int32,
-        mscorlib]], mscorlib
-    - Name: comparer
+      Data: 0|System.Collections.Generic.List`1[[System.ValueTuple`2[[Subroutine,
+        Assembly-CSharp],[System.Int32, mscorlib]], mscorlib]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
       Entry: 7
-      Data: 1|System.Collections.Generic.ObjectEqualityComparer`1[[Bit, Assembly-CSharp]],
+      Data: System.ValueTuple`2[[Subroutine, Assembly-CSharp],[System.Int32, mscorlib]],
         mscorlib
+    - Name: Item1
+      Entry: 7
+      Data: 1|SlowProcessor, Assembly-CSharp
+    - Name: name
+      Entry: 1
+      Data: Slow Processor Speed
+    - Name: description
+      Entry: 1
+      Data: 15% Cycle Decrease
+    - Name: modifier
+      Entry: 7
+      Data: 2|Modifier, Assembly-CSharp
+    - Name: type
+      Entry: 3
+      Data: 1
+    - Name: value
+      Entry: 4
+      Data: -0.15
     - Name: 
       Entry: 8
       Data: 
     - Name: 
-      Entry: 12
-      Data: 1
+      Entry: 8
+      Data: 
+    - Name: Item2
+      Entry: 3
+      Data: 5
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 7
-      Data: 
-    - Name: $k
+      Data: System.ValueTuple`2[[Subroutine, Assembly-CSharp],[System.Int32, mscorlib]],
+        mscorlib
+    - Name: Item1
       Entry: 7
-      Data: 2|Bit, Assembly-CSharp
-    - Name: bitType
-      Entry: 3
-      Data: 2
-    - Name: depth
-      Entry: 3
-      Data: 8
-    - Name: decrypted
+      Data: 3|BloatCard, Assembly-CSharp
+    - Name: name
+      Entry: 1
+      Data: Bloat
+    - Name: description
+      Entry: 1
+      Data: Bloats
+    - Name: cycleCostIncrease
+      Entry: 7
+      Data: 4|intRef, Assembly-CSharp
+    - Name: constant
       Entry: 5
-      Data: false
-    - Name: testEvent
+      Data: true
+    - Name: constValue
+      Entry: 3
+      Data: 3
+    - Name: intValue
+      Entry: 6
+      Data: 
+    - Name: modifiers
       Entry: 7
-      Data: 3|UnityEngine.Events.UnityEvent`1[[Program, Assembly-CSharp]], UnityEngine.CoreModule
-    - Name: m_PersistentCalls
-      Entry: 7
-      Data: 4|UnityEngine.Events.PersistentCallGroup, UnityEngine.CoreModule
-    - Name: m_Calls
-      Entry: 7
-      Data: 5|System.Collections.Generic.List`1[[UnityEngine.Events.PersistentCall,
-        UnityEngine.CoreModule]], mscorlib
+      Data: 5|System.Collections.Generic.List`1[[Modifier, Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
       Data: 0
@@ -74,6 +104,50 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 8
+      Data: 
+    - Name: Item2
+      Entry: 3
+      Data: 5
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: bitTypeWeights
+      Entry: 7
+      Data: 6|System.Collections.Generic.Dictionary`2[[Bit, Assembly-CSharp],[System.Int32,
+        mscorlib]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 7|System.Collections.Generic.ObjectEqualityComparer`1[[Bit, Assembly-CSharp]],
+        mscorlib
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 7
+      Data: 8|Bit, Assembly-CSharp
+    - Name: bitType
+      Entry: 3
+      Data: 2
+    - Name: depth
+      Entry: 3
+      Data: 8
+    - Name: decrypted
+      Entry: 5
+      Data: false
+    - Name: testEvent
+      Entry: 6
       Data: 
     - Name: decryptEvent
       Entry: 6
@@ -93,19 +167,6 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-    - Name: subroutines
-      Entry: 7
-      Data: 6|System.Collections.Generic.List`1[[System.ValueTuple`2[[Subroutine,
-        Assembly-CSharp],[System.Int32, mscorlib]], mscorlib]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
   name: Ouroboros
-  numBits: 12
+  bits: []
   icePrefab: {fileID: 6711592593724343391, guid: 18b22ef2722960d4c964b72903ce92d8, type: 3}

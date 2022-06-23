@@ -1,35 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events; 
 using System.Linq; 
 
-public class ICE : MonoBehaviour
+[System.Serializable]
+public class ICE
 {
     public ICEdata data;
+    [HideInInspector] public UnityEvent 
+        iceBreakEvent = new UnityEvent(),
+        iceRetireEvent = new UnityEvent(); 
 
     public bool broken => data.bits.All(bit => bit.decrypted == true);
 
-    public void Awake()
+    public ICE(ICEdata data)
     {
-        if (data != null)
-            Setup(data); 
-    }
-
-    void Setup(ICEdata data)
-    {
-        CombatManager.turnEndEvent.AddListener(Execute);
+        ServerManager.turnEndEvent.AddListener(ExecuteNextSubroutine);
         this.data = GameObject.Instantiate(data);        
 
-        foreach ((Subroutine s, int num) sub in this.data.subroutines) 
+        foreach ((Subroutine s, int num) sub in data.subroutines) 
         {
             for(int n = 0; n < sub.num; n++)
             {
                 int totalBitWeight = this.data.bitTypeWeights.Sum(kvp => kvp.Value);
                 int bitTypeSeed = Random.Range(0, totalBitWeight);
-
                 int weight = 0; 
                 
-                foreach (KeyValuePair<Bit, int> kvp in this.data.bitTypeWeights)
+                foreach (KeyValuePair<Bit, int> kvp in data.bitTypeWeights)
                 {
                     weight += kvp.Value;
                     if (weight > bitTypeSeed)
@@ -42,24 +40,32 @@ public class ICE : MonoBehaviour
         }
     }
 
-    public void Execute()
+    public void ExecuteNextSubroutine()
     {
         if(data.subroutines.Count > 0)
         {
-            Debug.Log($"{data.name} Executing");
-            (Subroutine routine, int bits) sub = data.subroutines.First(); 
+            (Subroutine routine, int bits) sub = data.subroutines.First();
 
-            if(data.bits.Take(sub.bits).Any(bit => bit.decrypted == false)) 
+            if(data.bits.Take(sub.bits).Any(bit => bit.decrypted == false))
+            {
+                Debug.Log($"{data.name} Executing");
                 sub.routine.Execute();
+            }
+            else
+            {
+                // The subroutine was broken previously - this should not happen
+                Debug.Log($"{sub.routine.name} is fully broken and cannot Execute"); 
+            }
 
             data.bits.RemoveRange(0, sub.bits);
+            data.subroutines.Remove(sub);
 
-            data.subroutines.Remove(sub); 
         }
 
         if (data.subroutines.Count > 0)
         {
             Debug.Log($"No Subroutines left on {data.name}; Destroying");
+            iceRetireEvent.Invoke(); 
         }
     }
 }

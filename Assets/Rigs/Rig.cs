@@ -9,15 +9,15 @@ public class Rig : MonoBehaviour
     public static UnityEvent<ICE> TraceEvent = new UnityEvent<ICE>();
 
     public new string name; 
-    public int memory; // Determines number of installed programs
-    public int busWidth; // Determines size of draw
-    public int clockSpeed; // Determines number of cycles per turn, energy
+    public intRef memory; // Determines number of installed programs
+    public intRef busWidth; // Determines size of draw
+    public intRef clockSpeed; // Determines number of cycles per turn, energy
     public int availableMemory => memory - installedPrograms.Sum(program => program.data.memoryCost);
 
     public List<Program> installedPrograms = new List<Program>();
-    public List<Card> hand, draw, discard, trash;
+    public List<Card> hand, drawDeck, discard, trash;
 
-    [SerializeField] List<CardData> startingHand = new List<CardData>();
+    [SerializeField] List<CardData> startingCards = new List<CardData>();
     public List<Executable> programExecutionStack { get; private set; } = new List<Executable>();
 
     [HideInInspector] public UnityEvent<Executable> 
@@ -36,19 +36,19 @@ public class Rig : MonoBehaviour
     public void Awake()
     {
         CreateStartingDrawDeck();
-        CombatManager.turnStartEvent.AddListener(DrawHand);
+        ServerManager.turnStartEvent.AddListener(DrawHand);
         cardPlayEvent.AddListener(OnPlayCard); 
     }
 
     [ContextMenu("Start Turn")]
-    public void StartTurn() => CombatManager.turnStartEvent.Invoke(); 
+    public void StartTurn() => ServerManager.turnStartEvent.Invoke(); 
 
     private void CreateStartingDrawDeck()
     {
-        foreach (CardData cardData in startingHand)
-            draw.Add(new Card(cardData));
+        foreach (CardData cardData in startingCards)
+            drawDeck.Add(new Card(cardData));
 
-        draw = draw.OrderBy(card => Random.value).ToList();
+        drawDeck = drawDeck.OrderBy(card => Random.value).ToList();
     }
 
     private void DrawHand()
@@ -57,10 +57,10 @@ public class Rig : MonoBehaviour
 
         for(int i = 0; i < drawNum; i++)
         {
-            if (draw.Count > 0)
+            if (drawDeck.Count > 0)
             {
-                Card card = draw[0];
-                draw.Remove(card);
+                Card card = drawDeck[0];
+                drawDeck.Remove(card);
                 hand.Add(card);
                 cardDrawEvent.Invoke(card); 
             }
@@ -77,7 +77,7 @@ public class Rig : MonoBehaviour
         }
     }
 
-    public virtual void Install(ProgramData programData)
+    public virtual void InstallProgram(ProgramData programData)
     {
         Program program = new Program(programData); 
         program.rig = this; 
@@ -119,6 +119,16 @@ public class Rig : MonoBehaviour
         foreach (Executable exe in dequeList)
             Dequeue(exe);
 
-        CombatManager.turnEndEvent.Invoke(); 
+        ServerManager.turnEndEvent.Invoke(); 
+    }
+
+    public void RemoveCard(Card card)
+    {
+        hand.Remove(card);
+        discard.Remove(card);
+        drawDeck.Remove(card);
+        trash.Add(card);
+
+        cardTrashEvent.Invoke(card); 
     }
 }

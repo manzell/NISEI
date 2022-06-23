@@ -48,8 +48,8 @@ public class UI_ExecutionStack : MonoBehaviour
         rig.enqueueEvent.AddListener(updateHeading);
         rig.dequeueEvent.AddListener(Dequeue);
         rig.dequeueEvent.AddListener(updateHeading);
-        CombatManager.turnStartEvent.AddListener(UpdateHeading);
-        CombatManager.turnStartEvent.AddListener(SetExecuteButtonStatus);
+        ServerManager.turnStartEvent.AddListener(UpdateHeading);
+        ServerManager.turnStartEvent.AddListener(SetExecuteButtonStatus);
     }
 
     private void RemoveListeners(Rig rig)
@@ -58,16 +58,17 @@ public class UI_ExecutionStack : MonoBehaviour
         rig.enqueueEvent.RemoveListener(updateHeading);
         rig.dequeueEvent.RemoveListener(Dequeue);
         rig.dequeueEvent.RemoveListener(updateHeading);
-        CombatManager.turnStartEvent.RemoveListener(UpdateHeading);
-        CombatManager.turnStartEvent.RemoveListener(SetExecuteButtonStatus);
+        ServerManager.turnStartEvent.RemoveListener(UpdateHeading);
+        ServerManager.turnStartEvent.RemoveListener(SetExecuteButtonStatus);
     }
 
     public void Enqueue(Executable exe)
     {
+        exe.updateExe.AddListener(UpdateHeading);
+
         Instantiate(executionPrefab, stackArea.transform)
             .GetComponent<UI_Executable>().Setup(exe); // TODO - styling, custom prefabs. 
 
-        exe.updateExe.AddListener(UpdateHeading); 
         SetExecuteButtonStatus();
     }
 

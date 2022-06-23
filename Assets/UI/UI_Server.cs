@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class UI_Server : MonoBehaviour
 {
-    public List<ICE> installedIce = new List<ICE>();
     [SerializeField] GameObject icePrefab, iceInstallArea;
 
     public void Start()
     {
-        Setup(); 
+        ServerManager.turnStartEvent.AddListener(Setup); 
     }
 
     public void Setup()
@@ -17,8 +16,8 @@ public class UI_Server : MonoBehaviour
         foreach (Transform t in iceInstallArea.transform)
             Destroy(t.gameObject); 
 
-        foreach(ICE ice in installedIce)
-            Instantiate(ice.data.icePrefab == null ? icePrefab : ice.data.icePrefab, iceInstallArea.transform)
-                .GetComponent<UI_Ice>().Setup(ice); 
+        if(ServerManager.currentIce != null)
+            Instantiate(ServerManager.currentIce.data.icePrefab == null ? icePrefab : ServerManager.currentIce.data.icePrefab, iceInstallArea.transform)
+                .GetComponent<UI_Ice>().Setup(ServerManager.currentIce); 
     }
 }

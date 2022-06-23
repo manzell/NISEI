@@ -21,7 +21,7 @@ public class UI_Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler
     public void Setup(Card card)
     {
         this.card = card;
-        cardTitle.text = card.cardData.name;
+        cardTitle.text = card.data.name;
         cardDescription.text = "hmm";
     }
 
