@@ -6,29 +6,28 @@ using System.Linq;
 //[CreateAssetMenu(menuName ="Subroutine/Weaken")]
 public class WeakenProgram : Subroutine
 {
+    public intRef turns;
     public Modifier modifier = new Modifier(Modifier.ModifierType.Multiplicitave, -0.15f);
-    public int turns = 2; 
 
     public override void Execute()
     {
-        Program program = ServerManager.currentRig.installedPrograms.OrderBy(p => Random.value).First(); 
+        Program programData = ServerManager.currentRig.installedPrograms.OrderBy(p => Random.value).First(); 
 
-        if(program != null)
+        if(programData != null)
         {
-            program.data.powerLevel.modifiers.Add(modifier);
+            programData.powerLevel.modifiers.Add(modifier);
             ServerManager.turnEndEvent.AddListener(TickDownModifier);
-            Debug.Log($"{name} reduces {ServerManager.currentRig.name} Program Strength by {modifier.Value(program.data.powerLevel)}"); 
+            Debug.Log($"{name} reduces {ServerManager.currentRig.name} Program Strength by {modifier.Value(programData.powerLevel)}"); 
         }
-
 
         void TickDownModifier()
         {
-            turns--;
+            turns -= 1; 
 
             if (turns <= 0)
-                program.data.powerLevel.modifiers.Remove(modifier);
+                programData.powerLevel.modifiers.Remove(modifier);
 
-            Debug.Log($"-{modifier.Value(program.data.powerLevel)} Modifier on {program.data.name} removed"); 
+            Debug.Log($"-{modifier.Value(programData.powerLevel)} Modifier on {programData.name} removed"); 
         }
     }
 

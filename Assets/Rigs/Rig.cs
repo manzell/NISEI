@@ -12,12 +12,12 @@ public class Rig : MonoBehaviour
     public intRef memory; // Determines number of installed programs
     public intRef busWidth; // Determines size of draw
     public intRef clockSpeed; // Determines number of cycles per turn, energy
-    public int availableMemory => memory - installedPrograms.Sum(program => program.data.memoryCost);
+    public int availableMemory => memory - installedPrograms.Sum(programData => programData.memoryCost);
 
     public List<Program> installedPrograms = new List<Program>();
     public List<Card> hand, drawDeck, discard, trash;
 
-    [SerializeField] List<CardData> startingCards = new List<CardData>();
+    [SerializeField] List<Card> startingCards = new List<Card>();
     public List<Executable> programExecutionStack { get; private set; } = new List<Executable>();
 
     [HideInInspector] public UnityEvent<Executable> 
@@ -45,15 +45,15 @@ public class Rig : MonoBehaviour
 
     private void CreateStartingDrawDeck()
     {
-        foreach (CardData cardData in startingCards)
-            drawDeck.Add(new Card(cardData));
+        foreach (Card cardData in startingCards)
+            drawDeck.Add(Instantiate(cardData));
 
         drawDeck = drawDeck.OrderBy(card => Random.value).ToList();
     }
 
     private void DrawHand()
     {
-        int drawNum = 5; // TODO make this dynamic
+        int drawNum = busWidth / 20;
 
         for(int i = 0; i < drawNum; i++)
         {
@@ -77,10 +77,10 @@ public class Rig : MonoBehaviour
         }
     }
 
-    public virtual void InstallProgram(ProgramData programData)
+    public virtual void InstallProgram(Program program)
     {
-        Program program = new Program(programData); 
-        program.rig = this; 
+        program = Instantiate(program); 
+
         installedPrograms.Add(program);
         installEvent.Invoke(program);        
     }

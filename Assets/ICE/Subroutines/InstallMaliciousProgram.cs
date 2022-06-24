@@ -5,7 +5,7 @@ using UnityEngine;
 //[CreateAssetMenu(menuName = "Subroutine/InstallProgram")]
 public class InstallMaliciousProgram : Subroutine
 {
-    public ProgramData programData;
+    public Program programData;
 
     public override void Execute()
     {

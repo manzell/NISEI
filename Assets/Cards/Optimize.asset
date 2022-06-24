@@ -13,6 +13,11 @@ MonoBehaviour:
   m_Name: Optimize
   m_EditorClassIdentifier: 
   name: Optimize
+  cyclePlayCost:
+    constant: 1
+    constValue: 1
+    intValue: {fileID: 0}
+    modifiers: []
   playBehavior: {fileID: 11400000, guid: 267b03ede0da3094192e4afd0f6d6292, type: 2}
   discardBehavior: {fileID: 0}
   trashBehavior: {fileID: 0}

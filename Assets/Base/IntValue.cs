@@ -2,31 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "dataType/i")]
+[CreateAssetMenu(menuName = "dataType/int")]
 public class IntValue : ScriptableObject
 {
     public int Value;
 }
 
 [System.Serializable]
-public class intRef
+public class intRef : IModifiable
 {
+    public string name => intValue?.name; 
     public bool constant;
     public int constValue;
-    public IntValue intValue = new IntValue();
+    public IntValue intValue;
 
-    public List<Modifier> modifiers = new List<Modifier>();
+    public List<Modifier> modifiers { get; set; } = new List<Modifier>();
 
-    public int Value
+    public float Value
     {
         get { return baseValue + modification; }
-        set { intValue.Value = value; }
+        set { intValue.Value = (int)value; }
     }
 
-    int baseValue
+    public float baseValue
     {
         get { return constant ? constValue : intValue.Value; }
-        set { intValue.Value = value; }
+        set { intValue.Value = (int)value; }
     }
 
     int modification
@@ -54,11 +55,20 @@ public class intRef
     public intRef(IntValue i)
     {
         constant = false;
-        intValue = i; 
+        intValue = GameObject.Instantiate(i);
+    }
+    public intRef(intRef i)
+    {
+        constant = i.constant;
+        modifiers = i.modifiers; 
+        if (i.constant)
+            constValue = i.constValue;
+        else
+            intValue = i.intValue;
     }
 
-    public static implicit operator int(intRef i) { return i.Value; }
-    public static explicit operator string(intRef s) => s.Value.ToString();
+    public static implicit operator int(intRef i) { return (int)i.Value; }
+    public static implicit operator string(intRef s) => s.Value.ToString();
     public static intRef operator +(intRef a, intRef b) { a.Value += b.Value; return a; }
     public static intRef operator +(intRef a, int b) { a.Value += b; return a; }
     public static intRef operator -(intRef a, intRef b) { a.Value -= b.Value; return a; }

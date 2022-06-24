@@ -17,5 +17,13 @@ public class Modifier
     }
 
     public float Value(floatRef r) => type == ModifierType.Flat ? value : value * r.baseValue;
-    public float Value(intRef i) => type == ModifierType.Flat ? (int)value : (int)(value * i.Value);
+    public int Value(intRef i) => type == ModifierType.Flat ? (int)value : (int)(value * i.baseValue);
+    public float Value(IModifiable i) => type == ModifierType.Flat ? value : (value * i.baseValue);
+}
+
+public interface IModifiable
+{
+    public List<Modifier> modifiers { get; set; }
+    public float Value { get; set; }
+    public float baseValue { get; set; }
 }

@@ -5,12 +5,12 @@ using UnityEngine;
 //[CreateAssetMenu(menuName = "Subroutine/AddCard")]
 public class AddCard : Subroutine
 {
-    public CardData cardData; 
+    public Card card; 
     public override void Execute()
     {
-        Card card = new Card(cardData);
+        card = GameObject.Instantiate(card); 
 
-        Debug.Log($"{name} adds {card.data.name} to {ServerManager.currentRig.name}!");
+        Debug.Log($"{name} adds {card.name} to {ServerManager.currentRig.name}!");
         ServerManager.currentRig.drawDeck.Add(card); 
     }
 }

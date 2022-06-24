@@ -1,27 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
-using Sirenix.OdinInspector; 
 
-public class Program
+public abstract class Program : ScriptableObject
 {
-    public string name;
-    public ProgramData data; 
-    public Rig rig;
+    public enum ProgramType { Fracter, Decoder, Killer }
 
-    public ICE targetIce => ServerManager.currentIce; 
+    public new string name;
+    public string version; 
+    public ProgramType programType;
+    public floatRef powerLevel, widthFactor;
+    public intRef decryptionLevel;
+    public intRef memoryCost;
+    public intRef cycleCost; // This determines our guesses per bit // 
 
-    public Program(ProgramData data)
-    {
-        this.data = GameObject.Instantiate(data);
-    }
+    public PlayBehavior installBehavior, uninstallBehavior;
+    public GameObject prefab;
 
+    public abstract Executable GetExecutable(Program program); 
+    
     public void Enqueue()
     {
         // The program must create it's own executable. This means it has to be held in ProgramData
-
-
-        rig.Enqueue(data.programBehavior.GetExecutable(this)); 
+        ServerManager.currentRig.Enqueue(GetExecutable(this));
     }
 }

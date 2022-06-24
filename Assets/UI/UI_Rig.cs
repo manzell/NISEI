@@ -20,8 +20,8 @@ public class UI_Rig : MonoBehaviour
     public void Setup(Rig rig)
     {
         this.rig = rig;
-        clockSpeed.text = rig.clockSpeed + " qHz";
-        busWidth.text = rig.busWidth.ToString();
+        clockSpeed.text = $"{(string)rig.clockSpeed} qHz";
+        busWidth.text = $"{(string)rig.busWidth}";
 
         foreach (Transform t in memoryArea.transform)
             Destroy(t.gameObject); 
@@ -30,7 +30,7 @@ public class UI_Rig : MonoBehaviour
         {
             GameObject mem = Instantiate(memoryPrefab, memoryArea.transform);
 
-            if (i < rig.installedPrograms.Sum(program => program.data.memoryCost))
+            if (i < rig.installedPrograms.Sum(programData => programData.memoryCost))
                 mem.GetComponent<Image>().color = Color.yellow; 
         }
     }

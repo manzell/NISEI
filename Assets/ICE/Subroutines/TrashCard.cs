@@ -24,7 +24,7 @@ public class TrashCard : Subroutine
         else if (rig.hand.Contains(card))
             source = "Hand";
 
-        Debug.Log($"{name} trashes {card.data.name} from {rig.name}'s {source}");
+        Debug.Log($"{name} trashes {card.name} from {rig.name}'s {source}");
 
         rig.RemoveCard(card); 
     }

@@ -7,31 +7,31 @@ using TMPro;
 
 public class UI_Program : MonoBehaviour
 {
-    public Program program;
+    public Program programData;
     [SerializeField] TextMeshProUGUI programName, cycleCost, complexity;
     [SerializeField] Button runProgramButton; 
     [SerializeField] GameObject memoryIconArea, memoryIconPrefab;
 
     private void Start()
     {
-        if (program != null) 
-            Setup(program); 
+        if (programData != null) 
+            Setup(programData); 
     }
 
-    public void Setup(Program program)
+    public void Setup(Program programData)
     {
-        this.program = program;
-        programName.text = program.data.name + "()";
-        gameObject.name = program.data.name; 
-        cycleCost.text = $"Cycle Cost: {program.data.cycleCost}<br><br>Complexity: {program.data.decryptionLevel}";
+        this.programData = programData;
+        programName.text = programData.name + "()";
+        gameObject.name = programData.name; 
+        cycleCost.text = $"Cycle Cost: {(string)programData.cycleCost}<br><br>Complexity: {(string)programData.decryptionLevel}";
         
         runProgramButton.onClick.RemoveAllListeners();
-        runProgramButton.onClick.AddListener(program.Enqueue); 
+        runProgramButton.onClick.AddListener(programData.Enqueue); 
 
         foreach(Transform t in memoryIconArea.transform)
             Destroy(t.gameObject);
 
-        for (int i = 0; i < program.data.memoryCost; i++)
-            Instantiate(program.data.prefab == null ? memoryIconPrefab : program.data.prefab, memoryIconArea.transform);
+        for (int i = 0; i < programData.memoryCost; i++)
+            Instantiate(programData.prefab == null ? memoryIconPrefab : programData.prefab, memoryIconArea.transform);
     }
 }

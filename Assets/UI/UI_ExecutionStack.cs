@@ -25,7 +25,7 @@ public class UI_ExecutionStack : MonoBehaviour
 
     void UpdateHeading()
     {
-        heading.text = $"Execution Stack > {stackArea.GetComponentsInChildren<UI_Executable>().Sum(_e => _e.exe.cycles.Value)}/{rig.clockSpeed}";
+        heading.text = $"Execution Stack > {stackArea.GetComponentsInChildren<UI_Executable>().Sum(_e => _e.exe.cycles.Value)}/{(string)rig.clockSpeed}";
     }
 
     public void Setup(Rig rig)

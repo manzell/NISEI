@@ -9,13 +9,13 @@ public class FloatValue : ScriptableObject
 }
 
 [System.Serializable]
-public class floatRef
+public class floatRef : IModifiable
 {
     public bool constant;
     public float constValue;
     public FloatValue floatValue;
 
-    public List<Modifier> modifiers = new List<Modifier>();
+    public List<Modifier> modifiers { get; set; } = new List<Modifier>();
 
     float modification
     {
@@ -33,7 +33,6 @@ public class floatRef
             return baseValue * percent + flat; 
         }
     }
-
 
     public float baseValue
     {

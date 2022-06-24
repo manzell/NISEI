@@ -21,15 +21,15 @@ public class UI_Executable : MonoBehaviour
         this.exe = exe;
         exe.updateExe.AddListener(UpdateText); 
 
-        switch (exe.program?.data.programType)
+        switch (exe.program?.programType)
         {
-            case ProgramData.ProgramType.Fracter:
+            case Program.ProgramType.Fracter:
                 outline.effectColor = new Color(.2f, .8f, .2f);
                 break;
-            case ProgramData.ProgramType.Decoder:
+            case Program.ProgramType.Decoder:
                 outline.effectColor = new Color(.2f, .2f, .8f);
                 break;
-            case ProgramData.ProgramType.Killer:
+            case Program.ProgramType.Killer:
                 outline.effectColor = new Color(.8f, 0f, .8f);
                 break;
         }

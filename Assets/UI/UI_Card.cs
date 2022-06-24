@@ -21,7 +21,7 @@ public class UI_Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler
     public void Setup(Card card)
     {
         this.card = card;
-        cardTitle.text = card.data.name;
+        cardTitle.text = card.name;
         cardDescription.text = "hmm";
     }
 
@@ -29,10 +29,7 @@ public class UI_Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler
     {
         if(card != null)
         {
-            Rig rig = FindObjectOfType<Rig>(); // TODO Get a better reference for Rig
-            
-            card.Play(rig);
-            rig.cardPlayEvent.Invoke(card);
+            card.Play();
 
             Destroy(gameObject);
         }

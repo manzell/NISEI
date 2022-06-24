@@ -18,10 +18,10 @@ public class UI_InstalledPrograms : MonoBehaviour
         p.GetComponent<UI_Program>().Setup(program); 
     }
 
-    public void Uninstall(Program program)
+    public void Uninstall(Program programData)
     {
         foreach(UI_Program installedProgram in installedProgramsArea.GetComponentsInChildren<UI_Program>())
-            if (installedProgram.program == program)
+            if (installedProgram.programData == programData)
                 Destroy(installedProgram.gameObject); 
     }
 }
