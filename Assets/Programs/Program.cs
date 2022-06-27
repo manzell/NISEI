@@ -2,26 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(menuName ="Program/Program")]
 public abstract class Program : ScriptableObject
 {
-    public enum ProgramType { Fracter, Decoder, Killer }
-
     public new string name;
     public string version; 
-    public ProgramType programType;
-    public floatRef powerLevel, widthFactor;
-    public intRef decryptionLevel;
+    public List<ProgramType> programTypes;
+    public floatRef powerLevel;
     public intRef memoryCost;
-    public intRef cycleCost; // This determines our guesses per bit // 
+    public intRef executionCycleCost;
 
     public PlayBehavior installBehavior, uninstallBehavior;
     public GameObject prefab;
 
-    public abstract Executable GetExecutable(Program program); 
-    
-    public void Enqueue()
-    {
-        // The program must create it's own executable. This means it has to be held in ProgramData
-        ServerManager.currentRig.Enqueue(GetExecutable(this));
-    }
+    public abstract Executable GetExecutable(Program program);     
+    public void Enqueue() => ServerManager.currentRig.Enqueue(GetExecutable(this));
 }

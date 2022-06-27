@@ -6,8 +6,7 @@ using UnityEngine.Events;
 [System.Serializable]
 public class Bit
 {
-    public enum BitType { Barrier, CodeGate, Sentry }
-    public BitType bitType; 
+    public ICEType bitType; 
     public int depth;
     public int value { get; private set; }
     public bool decrypted = false;

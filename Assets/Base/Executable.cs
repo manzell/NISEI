@@ -10,7 +10,9 @@ public class Executable
     public intRef cycles;
     public bool flushable = true;
 
+
     // Optional datapoints? 
+    public Rig rig;
     public Program program;
     public ICE ice;
     public Card card;

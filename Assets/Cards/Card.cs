@@ -2,24 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu]
+[CreateAssetMenu(menuName ="Card/card")]
 public class Card : ScriptableObject
 {
     public new string name;
     public intRef cyclePlayCost;
+    public intRef busWidth;
+    public List<PlayBehavior> playBehaviors; 
     public PlayBehavior discardBehavior, trashBehavior, drawBehavior, flushBehavior;
 
-    public void Play()
-    {
-        Rig rig = ServerManager.currentRig;
-        Play(rig); 
-        rig.cardPlayEvent.Invoke(this);
-    }
+    public void Play() => Play(ServerManager.currentRig);
 
     public virtual void Play(Rig rig) 
-    { 
-        // Charge the Player the Cycles
-        // is the Play Behavior = The Card? 
+    {
+        foreach(PlayBehavior behavior in playBehaviors)// Todo - make this sequential with a callback?
+        {
+            behavior.Play(rig, this); 
+            rig.cardPlayEvent.Invoke(this);
+        }
     }
     /* Todo:  Generic Mapping of Events and Behaviors so that the card cand respond to any event
      */

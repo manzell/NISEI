@@ -12,13 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de822dfde917d9e47a088c699e61cb36, type: 3}
   m_Name: Thorch
   m_EditorClassIdentifier: 
-  name: Torch CD
+  name: Thorch
   cyclePlayCost:
     constant: 1
     constValue: 1
     intValue: {fileID: 0}
-    modifiers: []
-  playBehavior: {fileID: 11400000, guid: 66783811163acf94ca4161766653aff2, type: 2}
+  busWidth:
+    constant: 0
+    constValue: 0
+    intValue: {fileID: 0}
+  playBehaviors:
+  - {fileID: 11400000, guid: 424453daef501664faf4dedfcd83b6ef, type: 2}
   discardBehavior: {fileID: 0}
   trashBehavior: {fileID: 0}
   drawBehavior: {fileID: 0}

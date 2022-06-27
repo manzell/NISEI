@@ -4,19 +4,21 @@ using UnityEngine;
 using System.Linq; 
 
 [CreateAssetMenu(menuName ="Card/ModifyProgramCycleCost")]
-public class ModifyProgramCycleCost : Card
+public class ModifyProgramCycleCost : PlayBehavior
 {
-    public Modifier modifier; 
+    public Modifier modifier;
+    public Executable target; 
 
-    public override void Play(Rig rig)
+    public override void Play(Rig rig, Card card)
     {
-        Executable exe = rig.programExecutionStack.Last(); 
+        if(target == null) 
+            target = rig.programExecutionStack.Last(); 
 
-        if(exe != null)
+        if(target != null)
         {
-            exe.cycles.modifiers.Add(modifier); 
-            Debug.Log($"|OPTIMIZE> {name} reducing {exe.name} Cycle Cost by {modifier.Value(exe.cycles)}");
-            exe.updateExe.Invoke(); 
+            target.cycles.modifiers.Add(modifier); 
+            Debug.Log($"|OPTIMIZE> {card.name} reducing {target.name} Cycle Cost by {modifier.Value(target.cycles)}");
+            target.updateExe.Invoke(); 
         }
         else
         {

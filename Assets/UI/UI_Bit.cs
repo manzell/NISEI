@@ -9,7 +9,8 @@ public class UI_Bit : MonoBehaviour
     Bit bit; 
     [SerializeField] Outline outline;
     [SerializeField] Image image;
-    [SerializeField] TextMeshProUGUI bitValueLabel; 
+    [SerializeField] TextMeshProUGUI bitValueLabel;
+    [SerializeField] ICEType barrier, codeGate, sentry; 
 
     public void Start()
     {
@@ -18,23 +19,15 @@ public class UI_Bit : MonoBehaviour
 
     public void Setup(Bit bit)
     {
-        this.bit = bit; 
+        if(bit.bitType == barrier)
+            outline.effectColor = Color.cyan;
+        if (bit.bitType == barrier)
+            outline.effectColor = Color.green;
+        if (bit.bitType == barrier)
+            outline.effectColor = Color.red;
 
-        switch(bit.bitType)
-        {
-            case Bit.BitType.Barrier:
-                outline.effectColor = Color.cyan;
-                break;
-            case Bit.BitType.CodeGate:
-                outline.effectColor = Color.green;
-                break;
-            case Bit.BitType.Sentry:
-                outline.effectColor = Color.red;
-                break; 
-        }
-
+        this.bit = bit;
         image.color = bit.decrypted ? outline.effectColor : Color.black; 
-
         bitValueLabel.text = bit.value.ToString(); 
         bitValueLabel.enabled = bit.decrypted;
 

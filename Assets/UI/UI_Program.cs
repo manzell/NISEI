@@ -7,23 +7,23 @@ using TMPro;
 
 public class UI_Program : MonoBehaviour
 {
-    public Program programData;
+    public Program program;
     [SerializeField] TextMeshProUGUI programName, cycleCost, complexity;
     [SerializeField] Button runProgramButton; 
     [SerializeField] GameObject memoryIconArea, memoryIconPrefab;
 
     private void Start()
     {
-        if (programData != null) 
-            Setup(programData); 
+        if (program != null) 
+            Setup(program); 
     }
 
     public void Setup(Program programData)
     {
-        this.programData = programData;
+        this.program = programData;
         programName.text = programData.name + "()";
         gameObject.name = programData.name; 
-        cycleCost.text = $"Cycle Cost: {(string)programData.cycleCost}<br><br>Complexity: {(string)programData.decryptionLevel}";
+        cycleCost.text = $"Cycle Cost: {(string)programData.executionCycleCost}<br><br>Complexity: {(string)programData.powerLevel}";
         
         runProgramButton.onClick.RemoveAllListeners();
         runProgramButton.onClick.AddListener(programData.Enqueue); 

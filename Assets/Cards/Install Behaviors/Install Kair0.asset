@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dafd32f77398f9541a72943297e7ad5c, type: 3}
-  m_Name: Install Thorch
+  m_Name: Install Kair0
   m_EditorClassIdentifier: 
-  programData: {fileID: 11400000, guid: cef14a20b384a4e41a8650dfe28b0642, type: 2}
+  program: {fileID: 11400000, guid: be9196c05c626fa489749723ffaffc1b, type: 2}

@@ -17,7 +17,7 @@ public class UI_Server : MonoBehaviour
             Destroy(t.gameObject); 
 
         if(ServerManager.currentIce != null)
-            Instantiate(ServerManager.currentIce.data.icePrefab == null ? icePrefab : ServerManager.currentIce.data.icePrefab, iceInstallArea.transform)
+            Instantiate(ServerManager.currentIce.icePrefab == null ? icePrefab : ServerManager.currentIce.icePrefab, iceInstallArea.transform)
                 .GetComponent<UI_Ice>().Setup(ServerManager.currentIce); 
     }
 }

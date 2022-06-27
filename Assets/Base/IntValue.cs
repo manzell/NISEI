@@ -16,7 +16,34 @@ public class intRef : IModifiable
     public int constValue;
     public IntValue intValue;
 
-    public List<Modifier> modifiers { get; set; } = new List<Modifier>();
+    public List<Modifier> modifiers { get; set; } = new List<Modifier>(); 
+
+    public intRef()
+    {
+        modifiers = new List<Modifier>(); 
+    }
+
+    public intRef(int i)
+    {
+        constant = true;
+        constValue = i;
+        modifiers = new List<Modifier>();
+    }
+    public intRef(IntValue i)
+    {
+        constant = false;
+        intValue = GameObject.Instantiate(i);
+        modifiers = new List<Modifier>();
+    }
+    public intRef(intRef i)
+    {
+        constant = i.constant;
+        modifiers = i.modifiers;
+        if (i.constant)
+            constValue = i.constValue;
+        else
+            intValue = i.intValue;
+    }
 
     public float Value
     {
@@ -45,26 +72,6 @@ public class intRef : IModifiable
 
             return (int)(baseValue * percent + flat);
         }
-    }
-
-    public intRef(int i)
-    {
-        constant = true;
-        constValue = i; 
-    }
-    public intRef(IntValue i)
-    {
-        constant = false;
-        intValue = GameObject.Instantiate(i);
-    }
-    public intRef(intRef i)
-    {
-        constant = i.constant;
-        modifiers = i.modifiers; 
-        if (i.constant)
-            constValue = i.constValue;
-        else
-            intValue = i.intValue;
     }
 
     public static implicit operator int(intRef i) { return (int)i.Value; }

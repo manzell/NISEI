@@ -6,12 +6,10 @@ using System.Linq;
 
 public class Rig : MonoBehaviour
 {
-    public static UnityEvent<ICE> TraceEvent = new UnityEvent<ICE>();
-
     public new string name; 
-    public intRef memory; // Determines number of installed programs
-    public intRef busWidth; // Determines size of draw
-    public intRef clockSpeed; // Determines number of cycles per turn, energy
+    public intRef memory; 
+    public intRef busWidth;
+    public intRef clockSpeed;
     public int availableMemory => memory - installedPrograms.Sum(programData => programData.memoryCost);
 
     public List<Program> installedPrograms = new List<Program>();
@@ -53,18 +51,21 @@ public class Rig : MonoBehaviour
 
     private void DrawHand()
     {
-        int drawNum = busWidth / 20;
+        int busSpace = (int)busWidth.Value; 
 
-        for(int i = 0; i < drawNum; i++)
+        for(int i = 0; i < drawDeck.Count; i++)
         {
-            if (drawDeck.Count > 0)
+            Card card = drawDeck[0];
+
+            if (busSpace - card.busWidth >= 0)
             {
-                Card card = drawDeck[0];
                 drawDeck.Remove(card);
                 hand.Add(card);
-                cardDrawEvent.Invoke(card); 
+                cardDrawEvent.Invoke(card);
+                busSpace -= card.busWidth; 
             }
-            else break; 
+            else
+                break;
         }
     }
 

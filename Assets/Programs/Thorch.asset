@@ -14,32 +14,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Thorch
   version: 22b
-  programType: 1
+  programTypes:
+  - {fileID: 11400000, guid: 7c700f5a6a87492469d1a89357ed751e, type: 2}
   powerLevel:
     constant: 1
     constValue: 1
     floatValue: {fileID: 0}
-    modifiers: []
-  widthFactor:
-    constant: 1
-    constValue: 0.5
-    floatValue: {fileID: 0}
-    modifiers: []
-  decryptionLevel:
-    constant: 1
-    constValue: 0
-    intValue: {fileID: 0}
-    modifiers: []
   memoryCost:
     constant: 1
     constValue: 1
     intValue: {fileID: 0}
-    modifiers: []
-  cycleCost:
+  executionCycleCost:
     constant: 1
-    constValue: 4
+    constValue: 6
     intValue: {fileID: 0}
-    modifiers: []
   installBehavior: {fileID: 0}
   uninstallBehavior: {fileID: 0}
   prefab: {fileID: 0}
+  approach: 0
+  widthFactor: 0

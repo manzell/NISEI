@@ -242,6 +242,9 @@ MonoBehaviour:
   executionName: {fileID: 3701688450703792072}
   executionDescription: {fileID: 3701688451342095894}
   outline: {fileID: 3701688451299168654}
+  fracter: {fileID: 11400000, guid: 1e64f4d8989820f43a93128baf5d359b, type: 2}
+  decoder: {fileID: 11400000, guid: 0f8e52169c22d774b83ab6e6b75514eb, type: 2}
+  killer: {fileID: 11400000, guid: 7c700f5a6a87492469d1a89357ed751e, type: 2}
 --- !u!1 &3701688451342095888
 GameObject:
   m_ObjectHideFlags: 0

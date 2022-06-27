@@ -2,37 +2,43 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events; 
+using Sirenix.OdinInspector;
 using System.Linq; 
 
-[System.Serializable]
-public class ICE
+[CreateAssetMenu(menuName ="ICE/ice")]
+public class ICE  : SerializedScriptableObject
 {
-    public ICEdata data;
-    [HideInInspector] public UnityEvent 
+    public new string name;
+    public List<ICEType> types = new List<ICEType>(); 
+    public List<Bit> bits = new List<Bit>();
+    public List<(Subroutine subroutine, int numBits)> subroutines = new List<(Subroutine subroutine, int numBits)>();
+    public Dictionary<Bit, int> bitTypeWeights = new Dictionary<Bit, int>(); 
+
+    public GameObject icePrefab;
+    [HideInInspector] public UnityEvent
         iceBreakEvent = new UnityEvent(),
-        iceRetireEvent = new UnityEvent(); 
+        iceRetireEvent = new UnityEvent();
 
-    public bool broken => data.bits.All(bit => bit.decrypted == true);
+    public bool broken => bits.All(bit => bit.decrypted == true);
 
-    public ICE(ICEdata data)
+    public void OnEncounter()
     {
         ServerManager.turnEndEvent.AddListener(ExecuteNextSubroutine);
-        this.data = GameObject.Instantiate(data);        
 
-        foreach ((Subroutine s, int num) sub in data.subroutines) 
+        foreach ((Subroutine s, int num) sub in subroutines)
         {
-            for(int n = 0; n < sub.num; n++)
+            for (int n = 0; n < sub.num; n++)
             {
-                int totalBitWeight = this.data.bitTypeWeights.Sum(kvp => kvp.Value);
+                int totalBitWeight = bitTypeWeights.Sum(kvp => kvp.Value);
                 int bitTypeSeed = Random.Range(0, totalBitWeight);
-                int weight = 0; 
-                
-                foreach (KeyValuePair<Bit, int> kvp in data.bitTypeWeights)
+                int weight = 0;
+
+                foreach (KeyValuePair<Bit, int> kvp in bitTypeWeights)
                 {
                     weight += kvp.Value;
                     if (weight > bitTypeSeed)
                     {
-                        this.data.bits.Add(new Bit(kvp.Key));
+                        bits.Add(new Bit(kvp.Key));
                         break;
                     }
                 }
@@ -42,30 +48,30 @@ public class ICE
 
     public void ExecuteNextSubroutine()
     {
-        if(data.subroutines.Count > 0)
+        if (subroutines.Count > 0)
         {
-            (Subroutine routine, int bits) sub = data.subroutines.First();
+            (Subroutine routine, int bits) sub = subroutines.First();
 
-            if(data.bits.Take(sub.bits).Any(bit => bit.decrypted == false))
+            if (bits.Take(sub.bits).Any(bit => bit.decrypted == false))
             {
-                Debug.Log($"{data.name} Executing");
+                Debug.Log($"{name} Executing");
                 sub.routine.Execute();
             }
             else
             {
                 // The subroutine was broken previously - this should not happen
-                Debug.Log($"{sub.routine.name} is fully broken and cannot Execute"); 
+                Debug.Log($"{sub.routine.name} is fully broken and cannot Execute");
             }
 
-            data.bits.RemoveRange(0, sub.bits);
-            data.subroutines.Remove(sub);
+            bits.RemoveRange(0, sub.bits);
+            subroutines.Remove(sub);
 
         }
 
-        if (data.subroutines.Count > 0)
+        if (subroutines.Count > 0)
         {
-            Debug.Log($"No Subroutines left on {data.name}; Destroying");
-            iceRetireEvent.Invoke(); 
+            Debug.Log($"No Subroutines left on {name}; Destroying");
+            iceRetireEvent.Invoke();
         }
     }
 }

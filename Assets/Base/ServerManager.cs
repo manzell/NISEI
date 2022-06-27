@@ -17,12 +17,13 @@ public class ServerManager : MonoBehaviour
         successfulRunEvent = new UnityEvent(),
         runEndEvent = new UnityEvent();
 
-    public List<ICEdata> ice;
+    public List<ICE> ice;
 
     private void Start()
     {
         turnStartEvent.AddListener(SpawnNextIce);
-        iceBreakEvent.AddListener(SpawnNextIce); 
+        iceBreakEvent.AddListener(SpawnNextIce);
+        currentRig = FindObjectOfType<Rig>(); 
     }
 
     void SpawnNextIce()
@@ -31,8 +32,9 @@ public class ServerManager : MonoBehaviour
         {
             if(ice.Count > 0)
             {
-                currentIce = new ICE(ice.First());
-                ice.Remove(currentIce.data);
+                currentIce = Instantiate(ice[0]); 
+                ice.RemoveAt(0);
+                currentIce.OnEncounter(); 
             }
             else
             {

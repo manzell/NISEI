@@ -21,7 +21,7 @@ public class UI_InstalledPrograms : MonoBehaviour
     public void Uninstall(Program programData)
     {
         foreach(UI_Program installedProgram in installedProgramsArea.GetComponentsInChildren<UI_Program>())
-            if (installedProgram.programData == programData)
+            if (installedProgram.program == programData)
                 Destroy(installedProgram.gameObject); 
     }
 }

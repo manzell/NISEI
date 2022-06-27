@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dafd32f77398f9541a72943297e7ad5c, type: 3}
-  m_Name: Install Absolom
+  m_Script: {fileID: 11500000, guid: e0fe55a97d1b0714ea6e0cb2c0a08a4c, type: 3}
+  m_Name: Code Gate
   m_EditorClassIdentifier: 
-  programData: {fileID: 11400000, guid: cacb4d63e087cfc4b894bd454b641af2, type: 2}
+  name: Code Gate

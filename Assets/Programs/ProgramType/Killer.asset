@@ -9,6 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2be67346b87fbae45940a43aadeea7b4, type: 3}
-  m_Name: Optimize
+  m_Script: {fileID: 11500000, guid: 6625d8b0ead75bc42aa38fcaf874cf46, type: 3}
+  m_Name: Killer
   m_EditorClassIdentifier: 
+  name: Killer
+  targetBitTypes:
+  - {fileID: 11400000, guid: 86399a65f8a6f954193066b2c594ca4e, type: 2}

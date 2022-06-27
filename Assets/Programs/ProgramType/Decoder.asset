@@ -9,7 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d95110dab23bfd46a7c23817a2e0880, type: 3}
-  m_Name: Default_Memory_Allocation
+  m_Script: {fileID: 11500000, guid: 6625d8b0ead75bc42aa38fcaf874cf46, type: 3}
+  m_Name: Decoder
   m_EditorClassIdentifier: 
-  Value: 5
+  name: Decoder
+  targetBitTypes:
+  - {fileID: 11400000, guid: 68ee468f2cd734f4a9a12bb59cd12bed, type: 2}
