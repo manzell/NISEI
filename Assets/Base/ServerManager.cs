@@ -17,14 +17,24 @@ public class ServerManager : MonoBehaviour
         successfulRunEvent = new UnityEvent(),
         runEndEvent = new UnityEvent();
 
+    public Rig rig; 
     public List<ICE> ice;
+
+    private void Awake()
+    {
+        currentRig = GameObject.Instantiate(rig);
+        rig = currentRig; 
+    }
 
     private void Start()
     {
         turnStartEvent.AddListener(SpawnNextIce);
         iceBreakEvent.AddListener(SpawnNextIce);
-        currentRig = FindObjectOfType<Rig>(); 
+        currentRig.Boot(); 
     }
+
+    [ContextMenu("Start Turn")]
+    public void StartTurn() => turnStartEvent.Invoke();
 
     void SpawnNextIce()
     {

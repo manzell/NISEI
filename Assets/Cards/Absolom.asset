@@ -18,8 +18,8 @@ MonoBehaviour:
     constValue: 1
     intValue: {fileID: 0}
   busWidth:
-    constant: 0
-    constValue: 0
+    constant: 1
+    constValue: 2
     intValue: {fileID: 0}
   playBehaviors:
   - {fileID: 11400000, guid: 183cf60e077bb2f40be11c8e702e7982, type: 2}

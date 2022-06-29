@@ -69,7 +69,7 @@ public class Decypher : Program
         ICE ice = ServerManager.currentIce; 
 
         Executable exe = new Executable(executable => DecypherICE(ice, executable));
-        exe.cycles = program.executionCycleCost;
+        exe.cycles = program.executionCost;
         exe.name = $"{program.name}({ice.name})";
         exe.description = $"Cycles: {exe.cycles}"; 
 

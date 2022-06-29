@@ -15,7 +15,8 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects: []
+    ReferencedUnityObjects:
+    - {fileID: 11400000, guid: 68ee468f2cd734f4a9a12bb59cd12bed, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -68,39 +69,12 @@ MonoBehaviour:
         mscorlib
     - Name: Item1
       Entry: 7
-      Data: 3|BloatCard, Assembly-CSharp
+      Data: 3|EndTheRun, Assembly-CSharp
     - Name: name
       Entry: 1
-      Data: Bloat
+      Data: End the Run
     - Name: description
-      Entry: 1
-      Data: Bloats
-    - Name: cycleCostIncrease
-      Entry: 7
-      Data: 4|intRef, Assembly-CSharp
-    - Name: constant
-      Entry: 5
-      Data: true
-    - Name: constValue
-      Entry: 3
-      Data: 3
-    - Name: intValue
       Entry: 6
-      Data: 
-    - Name: modifiers
-      Entry: 7
-      Data: 5|System.Collections.Generic.List`1[[Modifier, Assembly-CSharp]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
       Data: 
     - Name: 
       Entry: 8
@@ -119,11 +93,11 @@ MonoBehaviour:
       Data: 
     - Name: bitTypeWeights
       Entry: 7
-      Data: 6|System.Collections.Generic.Dictionary`2[[Bit, Assembly-CSharp],[System.Int32,
+      Data: 4|System.Collections.Generic.Dictionary`2[[Bit, Assembly-CSharp],[System.Int32,
         mscorlib]], mscorlib
     - Name: comparer
       Entry: 7
-      Data: 7|System.Collections.Generic.ObjectEqualityComparer`1[[Bit, Assembly-CSharp]],
+      Data: 5|System.Collections.Generic.ObjectEqualityComparer`1[[Bit, Assembly-CSharp]],
         mscorlib
     - Name: 
       Entry: 8
@@ -136,10 +110,10 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 7
-      Data: 8|Bit, Assembly-CSharp
+      Data: 6|Bit, Assembly-CSharp
     - Name: bitType
-      Entry: 3
-      Data: 2
+      Entry: 10
+      Data: 0
     - Name: depth
       Entry: 3
       Data: 8
@@ -168,5 +142,12 @@ MonoBehaviour:
       Entry: 8
       Data: 
   name: Ouroboros
+  types: []
   bits: []
   icePrefab: {fileID: 6711592593724343391, guid: 18b22ef2722960d4c964b72903ce92d8, type: 3}
+  iceBreakEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  iceRetireEvent:
+    m_PersistentCalls:
+      m_Calls: []

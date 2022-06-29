@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events; 
-using System.Linq; 
+using System.Linq;
 
-public class Rig : MonoBehaviour
+[CreateAssetMenu(menuName = "Rig/rig")]
+public class Rig : ScriptableObject
 {
     public new string name; 
     public intRef memory; 
@@ -16,6 +17,7 @@ public class Rig : MonoBehaviour
     public List<Card> hand, drawDeck, discard, trash;
 
     [SerializeField] List<Card> startingCards = new List<Card>();
+    [SerializeField] GameObject prefab; 
     public List<Executable> programExecutionStack { get; private set; } = new List<Executable>();
 
     [HideInInspector] public UnityEvent<Executable> 
@@ -31,38 +33,34 @@ public class Rig : MonoBehaviour
         cardDiscardEvent = new UnityEvent<Card>(),
         cardTrashEvent = new UnityEvent<Card>();
 
-    public void Awake()
+    public void Boot()
     {
-        CreateStartingDrawDeck();
         ServerManager.turnStartEvent.AddListener(DrawHand);
-        cardPlayEvent.AddListener(OnPlayCard); 
-    }
+        cardPlayEvent.AddListener(OnPlayCard);
 
-    [ContextMenu("Start Turn")]
-    public void StartTurn() => ServerManager.turnStartEvent.Invoke(); 
+        CreateStartingDrawDeck();
+    } 
 
     private void CreateStartingDrawDeck()
     {
-        foreach (Card cardData in startingCards)
+        foreach (Card cardData in startingCards.OrderBy(card => Random.value))
             drawDeck.Add(Instantiate(cardData));
-
-        drawDeck = drawDeck.OrderBy(card => Random.value).ToList();
     }
 
     private void DrawHand()
     {
-        int busSpace = (int)busWidth.Value; 
+        int drawSpace = (int)busWidth.Value; 
 
         for(int i = 0; i < drawDeck.Count; i++)
         {
             Card card = drawDeck[0];
 
-            if (busSpace - card.busWidth >= 0)
+            if (drawSpace + availableMemory - card.drawCost >= 0)
             {
                 drawDeck.Remove(card);
                 hand.Add(card);
                 cardDrawEvent.Invoke(card);
-                busSpace -= card.busWidth; 
+                drawSpace -= card.drawCost; 
             }
             else
                 break;

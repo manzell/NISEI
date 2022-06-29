@@ -394,8 +394,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 249380399}
-        m_TargetAssemblyTypeName: Rig, Assembly-CSharp
+      - m_Target: {fileID: 1926652667}
+        m_TargetAssemblyTypeName: ServerManager, Assembly-CSharp
         m_MethodName: StartTurn
         m_Mode: 1
         m_Arguments:
@@ -444,103 +444,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 197654410}
   m_CullTransparentMesh: 1
---- !u!1 &249380398
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 249380400}
-  - component: {fileID: 249380399}
-  m_Layer: 0
-  m_Name: Rig
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &249380399
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 249380398}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed293921290e1844cb86516d35d93a4b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: CrackerJacker
-  memory:
-    constant: 0
-    constValue: 5
-    intValue: {fileID: 11400000, guid: f0badf9544c19294e89aa9301605aba7, type: 2}
-  busWidth:
-    constant: 1
-    constValue: 10
-    intValue: {fileID: 11400000, guid: c7163e4bae255e9419d6c58ad942de8c, type: 2}
-  clockSpeed:
-    constant: 1
-    constValue: 20
-    intValue: {fileID: 11400000, guid: 0303fa4bc6e32bc498c0622dc0b1976e, type: 2}
-  installedPrograms: []
-  hand: []
-  drawDeck: []
-  discard: []
-  trash: []
-  startingCards:
-  - {fileID: 11400000, guid: 52feabd8e4772ed42b8c884323396c41, type: 2}
-  - {fileID: 11400000, guid: 054af22cd766864458133ddab4a32d3b, type: 2}
-  - {fileID: 11400000, guid: ca4fe6c9a5ce42b4481efd72e1bdf22f, type: 2}
-  - {fileID: 11400000, guid: ca4fe6c9a5ce42b4481efd72e1bdf22f, type: 2}
-  - {fileID: 11400000, guid: 93bfebd79c5c23f46ada912322ddb6a6, type: 2}
-  - {fileID: 11400000, guid: 30c1583cb41d1fa459e0c09aa5b137ea, type: 2}
-  - {fileID: 11400000, guid: 93bfebd79c5c23f46ada912322ddb6a6, type: 2}
-  enqueueEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  executeEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  dequeueEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  installEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  uninstallEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  cardDrawEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  cardPlayEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  cardDiscardEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  cardTrashEvent:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!4 &249380400
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 249380398}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &328854136
 GameObject:
   m_ObjectHideFlags: 0
@@ -697,7 +600,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a3b5a621276954fb7facc81f5dae18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rig: {fileID: 249380399}
+  rig: {fileID: 0}
   executionPrefab: {fileID: 3701688451299168651, guid: 366417fe017faa546a6534dae60891bb, type: 3}
   stackArea: {fileID: 1050773497}
   executeButton: {fileID: 1753365783}
@@ -838,7 +741,7 @@ RectTransform:
   - {fileID: 656042953}
   - {fileID: 566610983}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -897,7 +800,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64207f5d58a885c41a88ea45499b7861, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rig: {fileID: 249380399}
+  rig: {fileID: 0}
   busWidth: {fileID: 1921712697}
   clockSpeed: {fileID: 836494294}
   memoryArea: {fileID: 992559867}
@@ -1007,7 +910,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54e77c557798db9469ad0597244ea5e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rig: {fileID: 249380399}
+  rig: {fileID: 0}
   cardPrefab: {fileID: 789085803122838615, guid: 2991de2fdf2a03547aee819c47d89d5a, type: 3}
   cardArea: {fileID: 842684821}
   button: {fileID: 197654412}
@@ -2062,7 +1965,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1753365781
 GameObject:
@@ -2647,6 +2550,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1674dcd5ae663947977befaf3d2c13e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rig: {fileID: 11400000, guid: 6e0c4827f9b721e43a66a5e443be0cc2, type: 2}
   ice:
   - {fileID: 11400000, guid: bd6b5ec21bb9bd24a9095e89f615a768, type: 2}
   - {fileID: 11400000, guid: 8a40d17c771666845b11fd024eeebdd9, type: 2}

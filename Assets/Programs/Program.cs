@@ -10,7 +10,7 @@ public abstract class Program : ScriptableObject
     public List<ProgramType> programTypes;
     public floatRef powerLevel;
     public intRef memoryCost;
-    public intRef executionCycleCost;
+    public intRef executionCost;
 
     public PlayBehavior installBehavior, uninstallBehavior;
     public GameObject prefab;

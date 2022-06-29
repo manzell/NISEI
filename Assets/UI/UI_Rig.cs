@@ -7,19 +7,16 @@ using System.Linq;
 
 public class UI_Rig : MonoBehaviour
 {
-    public Rig rig; 
     [SerializeField] TextMeshProUGUI busWidth, clockSpeed;
     [SerializeField] GameObject memoryArea, memoryPrefab;
 
     private void Start()
     {
-        if (rig != null)
-            Setup(rig); 
+        Setup(ServerManager.currentRig); 
     }
 
     public void Setup(Rig rig)
     {
-        this.rig = rig;
         clockSpeed.text = $"{(string)rig.clockSpeed} qHz";
         busWidth.text = $"{(string)rig.busWidth}";
 

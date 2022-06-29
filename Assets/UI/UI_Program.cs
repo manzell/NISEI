@@ -18,20 +18,20 @@ public class UI_Program : MonoBehaviour
             Setup(program); 
     }
 
-    public void Setup(Program programData)
+    public void Setup(Program program)
     {
-        this.program = programData;
-        programName.text = programData.name + "()";
-        gameObject.name = programData.name; 
-        cycleCost.text = $"Cycle Cost: {(string)programData.executionCycleCost}<br><br>Complexity: {(string)programData.powerLevel}";
+        this.program = program;
+        programName.text = program.name + "()";
+        gameObject.name = program.name; 
+        cycleCost.text = $"Cycle Cost: {(string)program.executionCost}<br><br>Complexity: {(string)program.powerLevel}";
         
         runProgramButton.onClick.RemoveAllListeners();
-        runProgramButton.onClick.AddListener(programData.Enqueue); 
+        runProgramButton.onClick.AddListener(program.Enqueue); 
 
         foreach(Transform t in memoryIconArea.transform)
             Destroy(t.gameObject);
 
-        for (int i = 0; i < programData.memoryCost; i++)
-            Instantiate(programData.prefab == null ? memoryIconPrefab : programData.prefab, memoryIconArea.transform);
+        for (int i = 0; i < program.memoryCost; i++)
+            Instantiate(program.prefab == null ? memoryIconPrefab : program.prefab, memoryIconArea.transform);
     }
 }

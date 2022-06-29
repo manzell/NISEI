@@ -6,13 +6,12 @@ using TMPro;
 
 public class UI_Hand : MonoBehaviour
 {
-    [SerializeField] Rig rig; 
     [SerializeField] GameObject cardPrefab, cardArea;
     [SerializeField] Button button; 
 
     private void Start()
     {
-        rig.cardDrawEvent.AddListener(OnCardDraw);
+        ServerManager.currentRig.cardDrawEvent.AddListener(OnCardDraw);
         ServerManager.turnStartEvent.AddListener(UpdateButton); 
     }
 

@@ -7,7 +7,7 @@ public class Card : ScriptableObject
 {
     public new string name;
     public intRef cyclePlayCost;
-    public intRef busWidth;
+    public intRef drawCost;
     public List<PlayBehavior> playBehaviors; 
     public PlayBehavior discardBehavior, trashBehavior, drawBehavior, flushBehavior;
 

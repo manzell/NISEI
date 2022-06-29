@@ -14,10 +14,14 @@ public class UI_Server : MonoBehaviour
     public void Setup()
     {
         foreach (Transform t in iceInstallArea.transform)
-            Destroy(t.gameObject); 
+            if(t.GetComponent<UI_Ice>() == null || t.GetComponent<UI_Ice>().ice.broken == true)
+                Destroy(t.gameObject);
 
+        // TODO Fix this so it doesn't reinstantiate a non-broken ICE each turn. 
         if(ServerManager.currentIce != null)
+        {
             Instantiate(ServerManager.currentIce.icePrefab == null ? icePrefab : ServerManager.currentIce.icePrefab, iceInstallArea.transform)
-                .GetComponent<UI_Ice>().Setup(ServerManager.currentIce); 
+                .GetComponent<UI_Ice>().Setup(ServerManager.currentIce);
+        }
     }
 }
