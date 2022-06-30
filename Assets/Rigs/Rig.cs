@@ -11,14 +11,15 @@ public class Rig : ScriptableObject
     public intRef memory; 
     public intRef busWidth;
     public intRef clockSpeed;
-    public int availableMemory => memory - installedPrograms.Sum(programData => programData.memoryCost);
+    public int availableMemory => (int)memory.Value - installedPrograms.Sum(program => program.memoryCost);
 
+
+    public List<Executable> programExecutionStack { get; private set; } = new List<Executable>(); 
     public List<Program> installedPrograms = new List<Program>();
     public List<Card> hand, drawDeck, discard, trash;
 
     [SerializeField] List<Card> startingCards = new List<Card>();
     [SerializeField] GameObject prefab; 
-    public List<Executable> programExecutionStack { get; private set; } = new List<Executable>();
 
     [HideInInspector] public UnityEvent<Executable> 
         enqueueEvent = new UnityEvent<Executable>(),
@@ -32,6 +33,8 @@ public class Rig : ScriptableObject
         cardPlayEvent = new UnityEvent<Card>(),
         cardDiscardEvent = new UnityEvent<Card>(),
         cardTrashEvent = new UnityEvent<Card>();
+    [HideInInspector] public UnityEvent<Rig>
+        updateRig = new UnityEvent<Rig>(); 
 
     public void Boot()
     {
@@ -49,9 +52,9 @@ public class Rig : ScriptableObject
 
     private void DrawHand()
     {
-        int drawSpace = (int)busWidth.Value; 
+        int drawSpace = (int)busWidth.Value;
 
-        for(int i = 0; i < drawDeck.Count; i++)
+        for (int i = 0; i < drawDeck.Count; i++)
         {
             Card card = drawDeck[0];
 
@@ -115,7 +118,7 @@ public class Rig : ScriptableObject
                 dequeList.Add(exe); 
         }
 
-        foreach (Executable exe in dequeList)
+        foreach (Executable exe in dequeList) 
             Dequeue(exe);
 
         ServerManager.turnEndEvent.Invoke(); 

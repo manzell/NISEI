@@ -8,7 +8,6 @@ using System.Linq;
 
 public class UI_ExecutionStack : MonoBehaviour
 {
-    [SerializeField] Rig rig; 
     [SerializeField] GameObject executionPrefab, stackArea;
     [SerializeField] Button executeButton;
     [SerializeField] TextMeshProUGUI heading;
@@ -18,14 +17,13 @@ public class UI_ExecutionStack : MonoBehaviour
     private void Start()
     {
         updateHeading = exe => UpdateHeading();
-
-        if (rig != null)
-            Setup(rig); 
+        Setup(ServerManager.currentRig); 
     }
 
     void UpdateHeading()
     {
-        heading.text = $"Execution Stack > {stackArea.GetComponentsInChildren<UI_Executable>().Sum(_e => _e.exe.cycles.Value)}/{(string)rig.clockSpeed}";
+        heading.text = "Execution Stack > " +
+            $"{stackArea.GetComponentsInChildren<UI_Executable>().Sum(_e => _e.exe.cycles.Value)}/{(string)ServerManager.currentRig.clockSpeed}";
     }
 
     public void Setup(Rig rig)
@@ -33,14 +31,13 @@ public class UI_ExecutionStack : MonoBehaviour
         foreach (Transform t in stackArea.transform)
             Destroy(t.gameObject);
 
-        RemoveListeners(this.rig);
+        RemoveListeners(rig);
         RegisterListeners(rig);
 
-        this.rig = rig;
         UpdateHeading();
     }
 
-    public void Execute() => rig?.Execute();
+    public void Execute() => ServerManager.currentRig?.Execute();
 
     private void RegisterListeners(Rig rig)
     {

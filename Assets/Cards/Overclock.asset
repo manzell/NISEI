@@ -17,9 +17,9 @@ MonoBehaviour:
     constant: 1
     constValue: 1
     intValue: {fileID: 0}
-  busWidth:
+  drawCost:
     constant: 1
-    constValue: 3
+    constValue: 4
     intValue: {fileID: 0}
   playBehaviors: []
   discardBehavior: {fileID: 0}

@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName ="Program/Program")]
 public abstract class Program : ScriptableObject
 {
     public new string name;

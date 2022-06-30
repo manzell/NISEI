@@ -79,5 +79,11 @@ public class intRef : IModifiable
     public static intRef operator +(intRef a, intRef b) { a.Value += b.Value; return a; }
     public static intRef operator +(intRef a, int b) { a.Value += b; return a; }
     public static intRef operator -(intRef a, intRef b) { a.Value -= b.Value; return a; }
-    public static intRef operator -(intRef a, int b) { a.Value -= b; return a; }
+    public static intRef operator -(intRef a, int b) {
+        Debug.Log("Intref-Int");
+        Debug.Log(a);
+        Debug.Log(a.Value);
+        Debug.Log(b); 
+        a.Value -= b; return a; 
+    }
 }

@@ -17,18 +17,24 @@ public class UI_Rig : MonoBehaviour
 
     public void Setup(Rig rig)
     {
-        clockSpeed.text = $"{(string)rig.clockSpeed} qHz";
-        busWidth.text = $"{(string)rig.busWidth}";
+        rig.updateRig.AddListener(SetUIText);
+        SetUIText(rig); 
 
         foreach (Transform t in memoryArea.transform)
-            Destroy(t.gameObject); 
+            Destroy(t.gameObject);
 
-        for(int i = 0; i < rig.memory; i++)
+        for (int i = 0; i < rig.memory; i++)
         {
             GameObject mem = Instantiate(memoryPrefab, memoryArea.transform);
 
             if (i < rig.installedPrograms.Sum(programData => programData.memoryCost))
-                mem.GetComponent<Image>().color = Color.yellow; 
+                mem.GetComponent<Image>().color = Color.yellow;
         }
+    }
+
+    private void SetUIText(Rig rig)
+    {
+        clockSpeed.text = $"{(string)rig.clockSpeed} qHz";
+        busWidth.text = $"{(string)rig.busWidth}";
     }
 }

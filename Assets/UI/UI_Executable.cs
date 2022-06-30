@@ -21,7 +21,7 @@ public class UI_Executable : MonoBehaviour
     public void Setup(Executable exe)
     {
         this.exe = exe;
-        exe.updateExe.AddListener(UpdateText); 
+        exe.updateExe.AddListener(UpdateText);
 
         if(exe.program.programTypes.Contains(fracter))
             outline.effectColor = new Color(.2f, .8f, .2f);
@@ -29,6 +29,8 @@ public class UI_Executable : MonoBehaviour
             outline.effectColor = new Color(.2f, .2f, .8f);
         if (exe.program.programTypes.Contains(killer))
             outline.effectColor = new Color(.8f, 0f, .8f);
+
+        UpdateText(); 
     }
 
     public void UpdateText()

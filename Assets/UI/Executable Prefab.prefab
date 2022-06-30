@@ -149,7 +149,7 @@ GameObject:
   - component: {fileID: 3701688451299168654}
   - component: {fileID: 3701688451299168649}
   m_Layer: 5
-  m_Name: ExecutionPrefab
+  m_Name: Executable Prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -19,7 +19,7 @@ MonoBehaviour:
     intValue: {fileID: 0}
   busWidth:
     constant: 1
-    constValue: 10
+    constValue: 20
     intValue: {fileID: 0}
   clockSpeed:
     constant: 1
@@ -64,5 +64,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   cardTrashEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  updateRig:
     m_PersistentCalls:
       m_Calls: []
