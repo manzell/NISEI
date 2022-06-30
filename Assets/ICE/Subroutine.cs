@@ -2,10 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public abstract class Subroutine
+public abstract class Subroutine : ScriptableObject
 {
-    public string name;
+    public new string name;
     public string description;
 
     public abstract void Execute(); 

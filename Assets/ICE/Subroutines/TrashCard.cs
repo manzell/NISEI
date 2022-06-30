@@ -10,22 +10,12 @@ public class TrashCard : Subroutine
 
     public override void Execute()
     {
-        Rig rig = ServerManager.currentRig; 
-
         if(card == null)
-            card = rig.drawDeck.Union(rig.hand).Union(rig.discard).OrderBy(card => Random.value).First();
-
-        string source = string.Empty; 
-
-        if (rig.drawDeck.Contains(card))
-            source = "Draw Deck";
-        else if (rig.discard.Contains(card))
-            source = "Discard Pile";
-        else if (rig.hand.Contains(card))
-            source = "Hand";
-
-        Debug.Log($"{name} trashes {card.name} from {rig.name}'s {source}");
-
-        rig.RemoveCard(card); 
+            card = ServerManager.currentRig.GetAllCards().OrderBy(card => Random.value).First();
+        if(card != null)
+        {
+            Debug.Log($"{name} trashes {card.name} from the {ServerManager.currentRig.SourceDeck(card)}");
+            ServerManager.currentRig.RemoveCard(card);
+        }
     }
 }

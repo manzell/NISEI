@@ -5,22 +5,20 @@ using UnityEngine.Events;
 
 public class Executable
 {
-    public string name;
-    public string description;
+    public string Name { get; set; }
+    public string Desc { get; set; }
+    
     public intRef cycles;
-    public bool flushable = true;
+    public UnityEvent<Executable> updateExe = new UnityEvent<Executable>();
 
+    UnityAction<Executable> exe;
 
-    // Optional datapoints? 
-    public Rig rig;
-    public Program program;
-    public ICE ice;
-    public Card card;
-
-    public UnityEvent updateExe = new UnityEvent(); 
-    public UnityAction<Executable> exe;
-
-    public void Execute() => exe.Invoke(this);
+    List<ProgramType> programTypes = new List<ProgramType>(); 
+    public List<ProgramType> ProgramTypes
+    {
+        get { return programTypes; }
+        set { programTypes = value; }
+    }
 
     public Executable(UnityAction<Executable> exe)
     {
@@ -37,4 +35,8 @@ public class Executable
         this.exe = exe;
         this.cycles = cycles;
     }
+
+    public void Execute() => exe.Invoke(this);
+
+    
 }

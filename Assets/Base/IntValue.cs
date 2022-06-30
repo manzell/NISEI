@@ -47,11 +47,11 @@ public class intRef : IModifiable
 
     public float Value
     {
-        get { return baseValue + modification; }
+        get { return BaseValue + modification; }
         set { intValue.Value = (int)value; }
     }
 
-    public float baseValue
+    public float BaseValue
     {
         get { return constant ? constValue : intValue.Value; }
         set { intValue.Value = (int)value; }
@@ -65,12 +65,12 @@ public class intRef : IModifiable
                 percent = 0;
 
             foreach (Modifier mod in modifiers)
-                if (mod.type == Modifier.ModifierType.Flat)
-                    flat += mod.value;
+                if (mod.Type == Modifier.ModifierType.Flat)
+                    flat += mod.BaseValue;
                 else
-                    percent += mod.value;
+                    percent += mod.BaseValue;
 
-            return (int)(baseValue * percent + flat);
+            return (int)(BaseValue * percent + flat);
         }
     }
 

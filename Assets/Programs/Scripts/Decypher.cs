@@ -13,10 +13,10 @@ public class Decypher : Program
 
     public void DecypherICE(ICE ice, Executable exe)
     {
-        IEnumerable<ICEType> targetIceTypes = new List<ICEType>();
+        List<ICEType> targetIceTypes = new List<ICEType>();
 
         foreach (ProgramType _programType in programTypes)
-            targetIceTypes = targetIceTypes.Union(_programType.targetBitTypes);
+            targetIceTypes.AddRange(_programType.targetBitTypes);
 
         List<Bit> addressableBits = ice.bits.Where(bit => bit.decrypted == false && targetIceTypes.Contains(bit.bitType)).ToList();
 
@@ -31,12 +31,12 @@ public class Decypher : Program
 
             if (approach == Style.Depth)
             {
-                numBitsAddressed = numBitsAddressed + attemptsPerBit;
+                numBitsAddressed += attemptsPerBit;
                 attemptsPerBit = numBitsAddressed - attemptsPerBit;
-                numBitsAddressed = numBitsAddressed - attemptsPerBit;
+                numBitsAddressed -= attemptsPerBit;
             }
             
-            Debug.Log($"|{exe.name}>{exe.cycles} :: {numBitsAddressed}x{attemptsPerBit} bitfield address");
+            Debug.Log($"|{exe.Name}>{exe.cycles} :: {numBitsAddressed}x{attemptsPerBit} bitfield address");
 
             for (int i = 0; i < numBitsAddressed; i++)
             {
@@ -59,7 +59,7 @@ public class Decypher : Program
         }
         else
         {
-            Debug.Log($"|{exe.name}>No crackable bits on {ice.name}> Decryption ending"); 
+            Debug.Log($"|{exe.Name}>No crackable bits on {ice.name}> Decryption ending"); 
         }
     }
 
@@ -68,10 +68,9 @@ public class Decypher : Program
         ICE ice = ServerManager.currentIce; 
 
         Executable exe = new Executable(executable => DecypherICE(ice, executable));
-        exe.program = this; 
         exe.cycles = program.executionCost;
-        exe.name = $"{program.name}({ice.name})";
-        exe.description = $"Cycles: {(string)exe.cycles}";
+        exe.Name = $"{program.name}({ice.name})";
+        exe.Desc = $"Cycles: {(string)exe.cycles}";
 
         return exe; 
     }

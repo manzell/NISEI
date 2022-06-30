@@ -22,16 +22,16 @@ public class ModifyCard : Subroutine
         switch(source)
         {
             case CardSource.DrawDeck:
-                card = GetCardByOrder(order, rig.drawDeck);
+                card = rig.GetCardByOrder(order, rig.DrawDeck);
                 break;
             case CardSource.Hand:
-                card = GetCardByOrder(order, rig.hand);
+                card = rig.GetCardByOrder(order, rig.Hand);
                 break;
             case CardSource.Discard:
-                card = GetCardByOrder(order, rig.discard);
+                card = rig.GetCardByOrder(order, rig.Discards);
                 break;
             default:
-                card = GetCardByOrder(order, rig.drawDeck.Union(rig.hand).Union(rig.discard));
+                card = rig.GetCardByOrder(order, rig.GetAllCards());
                 break;
         }
 
@@ -39,19 +39,6 @@ public class ModifyCard : Subroutine
         {
             Debug.Log($"{name} modifies the {targetName} of {card.name} by {modifier.Value(target)}!");
             target.modifiers.Add(modifier); 
-        }
-
-        Card GetCardByOrder(Order order, IEnumerable<Card> cards)
-        {
-            switch (order)
-            {
-                case Order.First:
-                    return cards.First();
-                case Order.Last:
-                    return cards.Last();
-                default:
-                    return cards.OrderBy(card => Random.value).First(); 
-            }
         }
     }
 }

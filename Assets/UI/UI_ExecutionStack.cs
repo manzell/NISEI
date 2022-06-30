@@ -22,8 +22,8 @@ public class UI_ExecutionStack : MonoBehaviour
 
     void UpdateHeading()
     {
-        heading.text = "Execution Stack > " +
-            $"{stackArea.GetComponentsInChildren<UI_Executable>().Sum(_e => _e.exe.cycles.Value)}/{(string)ServerManager.currentRig.clockSpeed}";
+        heading.text = "|Stack> " +
+            $"{stackArea.GetComponentsInChildren<UI_Executable>().Sum(_e => _e.Exe.cycles.Value)}/{(string)ServerManager.currentRig.clockSpeed}";
     }
 
     public void Setup(Rig rig)
@@ -37,7 +37,7 @@ public class UI_ExecutionStack : MonoBehaviour
         UpdateHeading();
     }
 
-    public void Execute() => ServerManager.currentRig?.Execute();
+    public void Execute() => ServerManager.currentRig?.ExecuteStack();
 
     private void RegisterListeners(Rig rig)
     {
@@ -59,9 +59,12 @@ public class UI_ExecutionStack : MonoBehaviour
         ServerManager.turnStartEvent.RemoveListener(SetExecuteButtonStatus);
     }
 
+    UnityAction<Executable> call; 
+
     public void Enqueue(Executable exe)
     {
-        exe.updateExe.AddListener(UpdateHeading);
+        call = exe => UpdateHeading();
+        exe.updateExe.AddListener(call);
 
         Instantiate(executionPrefab, stackArea.transform)
             .GetComponent<UI_Executable>().Setup(exe); // TODO - styling, custom prefabs. 
@@ -71,14 +74,18 @@ public class UI_ExecutionStack : MonoBehaviour
 
     public void Dequeue(Executable exe)
     {
-        exe.updateExe.RemoveListener(UpdateHeading);
+        exe.updateExe.RemoveListener(call);
 
         foreach (Transform t in stackArea.transform)
-            if (t.GetComponent<UI_Executable>()?.exe == exe)
+            if (t.GetComponent<UI_Executable>()?.Exe == exe)
                 Destroy(t.gameObject);
 
         SetExecuteButtonStatus(); 
     }
 
-    void SetExecuteButtonStatus() => executeButton.interactable = stackArea.transform.childCount > 0;
+    void SetExecuteButtonStatus()
+    {
+        executeButton.interactable = stackArea.transform.childCount > 0;
+        executeButton.GetComponentInChildren<TextMeshProUGUI>().text = executeButton.interactable ? "|EXECUTE>" : "|STACK EMPTY>";
+    }
 }

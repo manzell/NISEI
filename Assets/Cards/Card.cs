@@ -6,10 +6,10 @@ using UnityEngine;
 public class Card : ScriptableObject
 {
     public new string name;
-    public intRef cyclePlayCost;
-    public intRef drawCost;
-    public List<PlayBehavior> playBehaviors; 
-    public PlayBehavior discardBehavior, trashBehavior, drawBehavior, flushBehavior;
+    [SerializeField] intRef playCost;
+    [SerializeField] intRef drawCost;
+    [SerializeField] List<PlayBehavior> playBehaviors; 
+    [SerializeField] PlayBehavior discardBehavior, trashBehavior, drawBehavior, flushBehavior;
 
     public void Play() => Play(ServerManager.currentRig);
 
@@ -21,6 +21,7 @@ public class Card : ScriptableObject
             rig.cardPlayEvent.Invoke(this);
         }
     }
-    /* Todo:  Generic Mapping of Events and Behaviors so that the card cand respond to any event
-     */
+
+    public int GetDrawCost() => (int)drawCost.Value;
+    public int GetPlayCost() => (int)playCost.Value;
 }

@@ -17,13 +17,12 @@ public class ServerManager : MonoBehaviour
         successfulRunEvent = new UnityEvent(),
         runEndEvent = new UnityEvent();
 
-    public Rig rig; 
-    public List<ICE> ice;
+    [SerializeField] Rig startingRig; 
+    [SerializeField] List<ICE> encounterIce;
 
     private void Awake()
     {
-        currentRig = GameObject.Instantiate(rig);
-        rig = currentRig; 
+        currentRig = GameObject.Instantiate(startingRig);
     }
 
     private void Start()
@@ -38,12 +37,13 @@ public class ServerManager : MonoBehaviour
 
     void SpawnNextIce()
     {
+        Debug.Log($"SpawnNextIce({currentIce})");
         if (currentIce == null)
         {
-            if(ice.Count > 0)
+            if(encounterIce.Count > 0)
             {
-                currentIce = Instantiate(ice[0]); 
-                ice.RemoveAt(0);
+                currentIce = Instantiate(encounterIce[0]); 
+                encounterIce.RemoveAt(0);
                 currentIce.OnEncounter(); 
             }
             else

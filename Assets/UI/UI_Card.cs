@@ -9,13 +9,14 @@ using TMPro;
 public class UI_Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
     public Card card;
-    [SerializeField] TextMeshProUGUI cardTitle, cardDescription; 
+    [SerializeField] TextMeshProUGUI cardTitle, cardDescription;
+    [SerializeField] Color hoverColor; 
     [SerializeField] RawImage image;
-    [SerializeField] Outline outline; 
 
     void Start()
     {
-        if (card != null) Setup(card); 
+        if (card != null) 
+            Setup(card); 
     }
 
     public void Setup(Card card)
@@ -30,11 +31,10 @@ public class UI_Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler
         if(card != null)
         {
             card.Play();
-
             Destroy(gameObject);
         }
     }
 
-    public void OnPointerEnter(PointerEventData eventData) => outline.enabled = true;
-    public void OnPointerExit(PointerEventData eventData) => outline.enabled = false; 
+    public void OnPointerEnter(PointerEventData eventData) => image.color = hoverColor;
+    public void OnPointerExit(PointerEventData eventData) => image.color = Color.clear; 
 }

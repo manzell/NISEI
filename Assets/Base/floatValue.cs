@@ -25,16 +25,16 @@ public class floatRef : IModifiable
                 percent = 0;
 
             foreach (Modifier mod in modifiers)
-                if (mod.type == Modifier.ModifierType.Flat)
-                    flat += mod.value;
+                if (mod.Type == Modifier.ModifierType.Flat)
+                    flat += mod.BaseValue;
                 else
-                    percent += mod.value;
+                    percent += mod.BaseValue;
 
-            return baseValue * percent + flat; 
+            return BaseValue * percent + flat; 
         }
     }
 
-    public float baseValue
+    public float BaseValue
     {
         get { return constant ? constValue : floatValue.Value; }
         set { floatValue.Value = value; }
@@ -42,7 +42,7 @@ public class floatRef : IModifiable
 
     public float Value
     {
-        get { return baseValue + modification; }
+        get { return BaseValue + modification; }
         set { floatValue.Value = value; }
     }
 
@@ -57,8 +57,8 @@ public class floatRef : IModifiable
         constValue = f;
     }
 
-    public static implicit operator float(floatRef f) => f.baseValue;
-    public static implicit operator string(floatRef f) => f.baseValue .ToString("#.##");
+    public static implicit operator float(floatRef f) => f.BaseValue;
+    public static implicit operator string(floatRef f) => f.BaseValue .ToString("#.##");
     public static floatRef operator +(floatRef a, floatRef b) { a.Value += b.Value; return a; }
     public static floatRef operator -(floatRef a, floatRef b) { a.Value -= b.Value; return a; }
 }

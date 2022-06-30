@@ -12,13 +12,13 @@ public class ModifyProgramCycleCost : PlayBehavior
     public override void Play(Rig rig, Card card)
     {
         if(target == null) 
-            target = rig.programExecutionStack.Last(); 
+            target = rig.ExecutionStack.Last(); 
 
         if(target != null)
         {
             target.cycles.modifiers.Add(modifier); 
-            Debug.Log($"|OPTIMIZE> {card.name} reducing {target.name} Cycle Cost by {modifier.Value(target.cycles)}");
-            target.updateExe.Invoke(); 
+            Debug.Log($"|OPTIMIZE> {card.name} reducing {target.Name} Cycle Cost by {modifier.Value(target.cycles)}");
+            target.updateExe.Invoke(target); 
         }
         else
         {
