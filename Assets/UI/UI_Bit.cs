@@ -7,7 +7,6 @@ using TMPro;
 public class UI_Bit : MonoBehaviour
 {
     Bit bit; 
-    [SerializeField] Outline outline;
     [SerializeField] Image image;
     [SerializeField] TextMeshProUGUI bitValueLabel;
     [SerializeField] ICEType barrier, codeGate, sentry; 
@@ -20,22 +19,29 @@ public class UI_Bit : MonoBehaviour
     public void Setup(Bit bit)
     {
         if(bit.bitType == barrier)
-            outline.effectColor = Color.cyan;
+            image.color = Color.cyan;
         if (bit.bitType == barrier)
-            outline.effectColor = Color.green;
+            image.color = Color.green;
         if (bit.bitType == barrier)
-            outline.effectColor = Color.red;
+            image.color = Color.red;
 
         this.bit = bit;
-        image.color = bit.decrypted ? outline.effectColor : Color.black; 
-        bitValueLabel.text = bit.value.ToString(); 
-        bitValueLabel.enabled = bit.decrypted;
 
         bit.decryptEvent.AddListener(OnDecrypt); 
     }
 
     void OnDecrypt()
     {
-        image.color = outline.effectColor;
+        bitValueLabel.text = bit.value.ToString();
+        bitValueLabel.enabled = bit.decrypted;
+    }
+
+    IEnumerator UpdateBitValue()
+    {
+        string ruby = "qwertyiuop[]asdfghjkl;'zxcvbnm,./1234567890-=`~!@#$%^&*()_+QWERTYUIOP{}\\|ASDFGHJKL:ZXCVBNM<>?";
+        bitValueLabel.text = ruby[Random.Range(0, ruby.Length)].ToString();
+
+        yield return new WaitForSeconds(0.1f);
+        UpdateBitValue(); 
     }
 }

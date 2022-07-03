@@ -28,7 +28,7 @@ public class UI_Rig : MonoBehaviour
         {
             GameObject mem = Instantiate(memoryPrefab, memoryArea.transform);
 
-            if (i < rig.Programs.Sum(programData => programData.memoryCost))
+            if (i < rig.Programs.Sum(programData => programData.MemoryCost))
                 mem.GetComponent<Image>().color = Color.yellow;
         }
 
@@ -37,7 +37,7 @@ public class UI_Rig : MonoBehaviour
 
     private void SetUIText(Rig rig)
     {
-        clockSpeed.text = $"{(string)rig.clockSpeed} qHz";
+        clockSpeed.text = $"{(string)rig.clockSpeed}qHz";
         busWidth.text = $"{(string)rig.busWidth}";
     }
 

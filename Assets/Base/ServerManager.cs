@@ -13,38 +13,41 @@ public class ServerManager : MonoBehaviour
         gameStartEvent = new UnityEvent(),
         turnStartEvent = new UnityEvent(),
         turnEndEvent = new UnityEvent(),
-        iceBreakEvent = new UnityEvent(),
         successfulRunEvent = new UnityEvent(),
-        runEndEvent = new UnityEvent();
+        failedRunEvent = new UnityEvent(),
+        jackOutEvent = new UnityEvent(); 
+
+    public static UnityEvent<ICE>
+        iceRezEvent = new UnityEvent<ICE>(),
+        iceBreakEvent = new UnityEvent<ICE>(); 
 
     [SerializeField] Rig startingRig; 
     [SerializeField] List<ICE> encounterIce;
 
     private void Awake()
     {
-        currentRig = GameObject.Instantiate(startingRig);
+        currentRig = Instantiate(startingRig);
     }
 
     private void Start()
     {
         turnStartEvent.AddListener(SpawnNextIce);
-        iceBreakEvent.AddListener(SpawnNextIce);
+        iceBreakEvent.AddListener(ice => SpawnNextIce());
         currentRig.Boot(); 
     }
 
-    [ContextMenu("Start Turn")]
     public void StartTurn() => turnStartEvent.Invoke();
 
     void SpawnNextIce()
     {
-        Debug.Log($"SpawnNextIce({currentIce})");
         if (currentIce == null)
         {
             if(encounterIce.Count > 0)
             {
-                currentIce = Instantiate(encounterIce[0]); 
-                encounterIce.RemoveAt(0);
-                currentIce.OnEncounter(); 
+                currentIce = Instantiate(encounterIce.First());
+                encounterIce.Remove(encounterIce.First());
+
+                currentIce.Rez(); 
             }
             else
             {

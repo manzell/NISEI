@@ -6,6 +6,7 @@ using UnityEngine;
 public class Card : ScriptableObject
 {
     public new string name;
+    public string description; 
     [SerializeField] intRef playCost;
     [SerializeField] intRef drawCost;
     [SerializeField] List<PlayBehavior> playBehaviors; 
@@ -15,10 +16,15 @@ public class Card : ScriptableObject
 
     public virtual void Play(Rig rig) 
     {
-        foreach(PlayBehavior behavior in playBehaviors)// Todo - make this sequential with a callback?
+        if(rig.cycles >= playCost)
         {
-            behavior.Play(rig, this); 
-            rig.cardPlayEvent.Invoke(this);
+            rig.ChargeCycles(playCost);
+
+            foreach (PlayBehavior behavior in playBehaviors)// Todo - make this sequential with a callback?
+            {
+                behavior.Play(rig, this);
+                rig.cardPlayEvent.Invoke(this);
+            }
         }
     }
 

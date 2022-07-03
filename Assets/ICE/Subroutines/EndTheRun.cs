@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//[CreateAssetMenu(menuName = "Subroutine/EndTheRunRun")]
+[CreateAssetMenu(menuName = "Subroutine/EndTheRun")]
 public class EndTheRun : Subroutine
 {
     public override void Execute()
     {
         Debug.Log("Ending The Run"); 
-        ServerManager.runEndEvent.Invoke(); 
+        ServerManager.failedRunEvent.Invoke(); 
     }
 }

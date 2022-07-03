@@ -6,6 +6,8 @@ public abstract class Subroutine : ScriptableObject
 {
     public new string name;
     public string description;
+    public int bitCount, bitDepth; 
+    public List<Bit> bits { get; private set; } = new List<Bit>(); 
 
-    public abstract void Execute(); 
+    public abstract void Execute();
 }

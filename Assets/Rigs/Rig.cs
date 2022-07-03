@@ -9,9 +9,10 @@ public class Rig : ScriptableObject
 {
     public new string name; 
     public intRef memory;
-    public int AvailableMemory => (int)memory.Value - Programs.Sum(program => program.memoryCost);
+    public int AvailableMemory => (int)memory.Value - Programs.Sum(program => program.MemoryCost);
     public intRef busWidth;
     public intRef clockSpeed;
+    public int cycles { get; private set; } = 0; 
     
     public List<Executable> ExecutionStack { get; private set; } = new List<Executable>();     
     public List<Program> Programs { get; private set; } = new List<Program>();
@@ -47,7 +48,11 @@ public class Rig : ScriptableObject
         CreateStartingDrawDeck();
 
         updateRig.Invoke(this); 
-    } 
+    }
+
+    /* RIG */
+    public void ChargeCycles(int c) => cycles -= c;
+    public void ChargeCycles(intRef c) => cycles -= c;
 
     /* STACK */
     public void Enqueue(Executable exe)
@@ -136,12 +141,12 @@ public class Rig : ScriptableObject
     }
     private void DrawUpOnTurnStart()
     {
-        Debug.Log($"Drawing up to {name} busWidth: {(int)busWidth.Value + AvailableMemory}");
         int drawSpace = (int)busWidth.Value + AvailableMemory;
+        cycles = (int)clockSpeed.Value; 
+
         while(drawSpace > 0)
         {
             Card card = Draw();
-            Debug.Log($"Drawing {card.name} ({card.GetDrawCost()})");
 
             if (card != null)
                 drawSpace -= card.GetDrawCost();

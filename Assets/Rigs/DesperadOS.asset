@@ -19,17 +19,12 @@ MonoBehaviour:
     intValue: {fileID: 0}
   busWidth:
     constant: 1
-    constValue: 20
+    constValue: 15
     intValue: {fileID: 0}
   clockSpeed:
     constant: 1
     constValue: 20
     intValue: {fileID: 0}
-  installedPrograms: []
-  hand: []
-  drawDeck: []
-  discard: []
-  trash: []
   startingCards:
   - {fileID: 11400000, guid: 52feabd8e4772ed42b8c884323396c41, type: 2}
   - {fileID: 11400000, guid: 054af22cd766864458133ddab4a32d3b, type: 2}
@@ -38,7 +33,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 93bfebd79c5c23f46ada912322ddb6a6, type: 2}
   - {fileID: 11400000, guid: ca4fe6c9a5ce42b4481efd72e1bdf22f, type: 2}
   - {fileID: 11400000, guid: 93bfebd79c5c23f46ada912322ddb6a6, type: 2}
-  prefab: {fileID: 0}
+  rigPrefab: {fileID: 0}
+  programPrefab: {fileID: 0}
+  executionPrefab: {fileID: 0}
+  cardPrefab: {fileID: 0}
   enqueueEvent:
     m_PersistentCalls:
       m_Calls: []

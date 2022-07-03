@@ -1,77 +1,63 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI; 
 using UnityEngine.Events; 
 using Sirenix.OdinInspector;
 using System.Linq; 
 
-[CreateAssetMenu(menuName ="ICE/ice")]
+[CreateAssetMenu(menuName ="ICE/Ice")]
 public class ICE  : SerializedScriptableObject
 {
     public new string name;
-    public List<ICEType> types = new List<ICEType>(); 
-    public List<Bit> bits = new List<Bit>();
-    public List<(Subroutine subroutine, int numBits)> subroutines = new List<(Subroutine subroutine, int numBits)>();
-    public Dictionary<Bit, int> bitTypeWeights = new Dictionary<Bit, int>(); 
+    [SerializeField] List<Subroutine> subroutines = new List<Subroutine>();
+    public Sprite sprite;
 
-    public GameObject icePrefab;
+    public List<ICEType> types { get; private set; } = new List<ICEType>();
+    public List<Subroutine> Subroutines => subroutines; 
+    public bool broken => Subroutines.All(sub => sub.bits.All(bit => bit.decrypted == true));
+
     [HideInInspector] public UnityEvent
         iceBreakEvent = new UnityEvent(),
-        iceRetireEvent = new UnityEvent();
+        derezIceEvent = new UnityEvent();
 
-    public bool broken => bits.All(bit => bit.decrypted == true);
-
-    public void OnEncounter()
+    public void Rez()
     {
+        for (int i = 0; i < subroutines.Count; i++)
+            subroutines[i] = Instantiate(subroutines[i]); 
+
+        // TODO Verify this works I'm not sure with the private set that we're dealing with the same copy of sub.bits
+        foreach (Subroutine sub in Subroutines)
+            for (int i = 0; i < sub.bitCount; i++)
+                sub.bits.Add(new Bit(this, sub.bitDepth)); 
+
+        ServerManager.iceRezEvent.Invoke(this);
         ServerManager.turnEndEvent.AddListener(ExecuteNextSubroutine);
-
-        foreach ((Subroutine s, int num) sub in subroutines)
-        {
-            for (int n = 0; n < sub.num; n++)
-            {
-                int totalBitWeight = bitTypeWeights.Sum(kvp => kvp.Value);
-                int bitTypeSeed = Random.Range(0, totalBitWeight);
-                int weight = 0;
-
-                foreach (KeyValuePair<Bit, int> kvp in bitTypeWeights)
-                {
-                    weight += kvp.Value;
-                    if (weight > bitTypeSeed)
-                    {
-                        bits.Add(new Bit(kvp.Key));
-                        break;
-                    }
-                }
-            }
-        }
     }
 
     public void ExecuteNextSubroutine()
     {
-        if (subroutines.Count > 0)
+        if (Subroutines.Count > 0)
         {
-            (Subroutine routine, int bits) sub = subroutines.First();
+            Subroutine sub = Subroutines.First(); 
 
-            if (bits.Take(sub.bits).Any(bit => bit.decrypted == false))
+            if (sub.bits.Any(bit => bit.decrypted == false))
             {
                 Debug.Log($"{name} Executing");
-                sub.routine.Execute();
+                sub.Execute();
             }
             else
             {
-                // The subroutine was broken previously - this should not happen
-                Debug.Log($"{sub.routine.name} is fully broken and cannot Execute");
+                Debug.Log($"{sub.name} is fully broken and cannot Execute");
             }
 
-            bits.RemoveRange(0, sub.bits);
-            subroutines.Remove(sub);
-
+            Subroutines.Remove(sub);
         }
 
-        if (subroutines.Count > 0)
+        if (Subroutines.Count > 0)
         {
-            Debug.Log($"No Subroutines left on {name}; Destroying");
-            iceRetireEvent.Invoke();
+            Debug.Log($"No Subroutines left on {name}; Derezzing");
+            derezIceEvent.Invoke();
         }
     }
 }

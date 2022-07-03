@@ -9,7 +9,7 @@ using System.Linq;
 public class UI_ExecutionStack : MonoBehaviour
 {
     [SerializeField] GameObject executionPrefab, stackArea;
-    [SerializeField] Button executeButton;
+    [SerializeField] Button button;
     [SerializeField] TextMeshProUGUI heading;
 
     UnityAction<Executable> updateHeading;
@@ -85,7 +85,7 @@ public class UI_ExecutionStack : MonoBehaviour
 
     void SetExecuteButtonStatus()
     {
-        executeButton.interactable = stackArea.transform.childCount > 0;
-        executeButton.GetComponentInChildren<TextMeshProUGUI>().text = executeButton.interactable ? "|EXECUTE>" : "|STACK EMPTY>";
+        button.interactable = stackArea.transform.childCount > 0;
+        button.GetComponentInChildren<TextMeshProUGUI>().text = button.interactable ? "|EXECUTE>" : "|STACK EMPTY>";
     }
 }

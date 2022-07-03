@@ -15,10 +15,13 @@ public class Decypher : Program
     {
         List<ICEType> targetIceTypes = new List<ICEType>();
 
-        foreach (ProgramType _programType in programTypes)
-            targetIceTypes.AddRange(_programType.targetBitTypes);
+        foreach (ProgramType type in programTypes)
+            targetIceTypes.AddRange(type.targetBitTypes);
 
-        List<Bit> addressableBits = ice.bits.Where(bit => bit.decrypted == false && targetIceTypes.Contains(bit.bitType)).ToList();
+        List<Bit> addressableBits = new List<Bit>();
+
+        foreach (Subroutine sub in ice.Subroutines)
+            addressableBits.AddRange(sub.bits.Where(bit => bit.decrypted == false && targetIceTypes.Contains(bit.bitType)));
 
         int power = (int)(powerLevel * ServerManager.currentRig.clockSpeed);
 
@@ -68,7 +71,7 @@ public class Decypher : Program
         ICE ice = ServerManager.currentIce; 
 
         Executable exe = new Executable(executable => DecypherICE(ice, executable));
-        exe.cycles = program.executionCost;
+        exe.cycles = program.ExecutionCost;
         exe.Name = $"{program.name}({ice.name})";
         exe.Desc = $"Cycles: {(string)exe.cycles}";
 

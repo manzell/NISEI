@@ -10,29 +10,25 @@ public class UI_Ice : MonoBehaviour
 {
     public ICE ice;
     [SerializeField] TextMeshProUGUI iceName;
-    [SerializeField] GameObject bitPanel;
-    [SerializeField] GameObject bitPrefab;
-    [SerializeField] Outline outline;
+    [SerializeField] Sprite sprite; 
+    [SerializeField] GameObject subArea, subRoutinePrefab;
 
     private void Start()
     {
-        if (ice != null)
-            Setup(ice);
+        ServerManager.iceRezEvent.AddListener(Setup); 
     }
 
     public void Setup(ICE ice)
     {
         this.ice = ice;
         iceName.text = ice.name;
-        gameObject.name = ice.name; 
+        gameObject.name = ice.name;
+        sprite = ice.sprite;
 
-        foreach (Transform t in bitPanel.transform)
+        foreach (Transform t in subArea.transform)
             Destroy(t.gameObject);
 
-        foreach(Bit bit in ice.bits)
-        {
-            GameObject _bitPrefab = Instantiate(bitPrefab, bitPanel.transform);
-            _bitPrefab.GetComponent<UI_Bit>().Setup(bit); 
-        }
+        foreach(Subroutine sub in ice.Subroutines)
+            Instantiate(subRoutinePrefab, subArea.transform).GetComponent<UI_Subroutine>().Setup(ice, sub); 
     }
 }

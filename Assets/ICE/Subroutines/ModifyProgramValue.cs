@@ -26,7 +26,7 @@ public class ModifyProgramValue : Subroutine
             turnDuration -= 1; 
 
             if (turnDuration <= 0)
-                program.powerLevel.modifiers.Remove(modifier);
+                program.PowerLevel.modifiers.Remove(modifier);
 
             Debug.Log($"-{modifier.Value(target)} Modifier on {program.name} removed"); 
         }
