@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de822dfde917d9e47a088c699e61cb36, type: 3}
+  m_Name: Overclock
+  m_EditorClassIdentifier: 
+  name: Overclock
+  description: Increases Processor Speed
+  playCost:
+    constant: 1
+    constValue: 5
+    intValue: {fileID: 0}
+  drawCost:
+    constant: 1
+    constValue: 4
+    intValue: {fileID: 0}
+  playBehaviors: []
+  discardBehavior: {fileID: 0}
+  trashBehavior: {fileID: 0}
+  drawBehavior: {fileID: 0}
+  flushBehavior: {fileID: 0}
