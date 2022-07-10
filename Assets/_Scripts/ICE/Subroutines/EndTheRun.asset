@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5564621d28412e449ada969f90ff8f95, type: 3}
+  m_Name: EndTheRun
+  m_EditorClassIdentifier: 
+  name: End The Run
+  description: Terminates the Run
+  program: {fileID: 11400000, guid: 7c1c4f9588e72f3429dd92d30e983dc4, type: 2}
+  bitType: {fileID: 11400000, guid: 68ee468f2cd734f4a9a12bb59cd12bed, type: 2}
+  numBits: 2
+  bitDepth: 7

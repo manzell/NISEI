@@ -9,22 +9,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de822dfde917d9e47a088c699e61cb36, type: 3}
+  m_Script: {fileID: 11500000, guid: 4eda6962d0716bf438ad321f10bb1938, type: 3}
   m_Name: Kair0
   m_EditorClassIdentifier: 
-  name: Install Kair0
-  description: Icebreaker * Fracter
+  name: 
+  description: 
   playCost:
     constant: 1
-    constValue: 5
+    constValue: 7
     intValue: {fileID: 0}
   drawCost:
     constant: 1
-    constValue: 4
+    constValue: 1
     intValue: {fileID: 0}
-  playBehaviors:
-  - {fileID: 11400000, guid: 06668826184e48649b73ea48c2d7bf4a, type: 2}
+  playBehaviors: []
   discardBehavior: {fileID: 0}
   trashBehavior: {fileID: 0}
   drawBehavior: {fileID: 0}
   flushBehavior: {fileID: 0}
+  program: {fileID: 11400000, guid: be9196c05c626fa489749723ffaffc1b, type: 2}

@@ -10,9 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1d3b78026a929574b865a8a1e86488ed, type: 3}
-  m_Name: End The Run 8x8
+  m_Name: EndTheRun
   m_EditorClassIdentifier: 
-  name: End The Run
-  description: Will Disconnect the connection to the Server
-  bitCount: 8
-  bitDepth: 8
+  name: Jack out
+  description: Ends the Run
+  version: 
+  memoryCost:
+    constant: 1
+    constValue: 0
+    intValue: {fileID: 0}
+  execCost:
+    constant: 1
+    constValue: 0
+    intValue: {fileID: 0}
+  installBehavior: {fileID: 0}
+  uninstallBehavior: {fileID: 0}
+  prefab: {fileID: 0}

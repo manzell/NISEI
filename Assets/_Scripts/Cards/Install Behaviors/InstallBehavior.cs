@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName ="Program/Install")]
-public class InstallProgram : PlayBehavior
+public class InstallBehavior : PlayBehavior
 {
     [SerializeField] Program program;
     public Program Program => program; 

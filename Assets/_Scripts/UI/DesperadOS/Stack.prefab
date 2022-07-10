@@ -132,6 +132,10 @@ PrefabInstance:
       propertyPath: m_text
       value: Stack
       objectReference: {fileID: 0}
+    - target: {fileID: 7899044799343792215, guid: 3286d8c2d7df5474bb469d87008ebced, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 30
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 3286d8c2d7df5474bb469d87008ebced, type: 3}

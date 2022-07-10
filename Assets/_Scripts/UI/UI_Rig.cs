@@ -9,7 +9,9 @@ public class UI_Rig : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI busWidth, clockSpeed;
     [SerializeField] TextMeshProUGUI drawCount, handCount, discardCount, trashCount;
+    [SerializeField] TextMeshProUGUI linkAmt, traceLevel;
     [SerializeField] GameObject memoryArea, memoryPrefab, cursorPrefab;
+    [SerializeField] GameObject yesNoPrompt, infoBox;
     int width = 20;
 
     private void Start()
@@ -17,7 +19,8 @@ public class UI_Rig : MonoBehaviour
         Setup(ServerManager.currentRig);
         
         cursorPrefab = Instantiate(cursorPrefab, transform);
-        cursorPrefab.name = "Cursor"; 
+        cursorPrefab.name = "Cursor";
+        cursorPrefab.transform.SetPositionAndRotation(Vector3.zero, Quaternion.identity); 
         cursorPrefab.GetComponent<RectTransform>().sizeDelta = new Vector2(width, width * 2); 
     }
 
@@ -25,8 +28,13 @@ public class UI_Rig : MonoBehaviour
     {
         Vector2 screenPosition = Input.mousePosition;
 
+        Debug.Log(screenPosition);
+        Debug.Log(Input.mousePosition); 
+
         screenPosition.x = (int)(screenPosition.x / width) * width + (width / 2);
         screenPosition.y = (int)(screenPosition.y / (width * 2)) * (width * 2) + width;
+
+        Debug.Log(screenPosition);
 
         cursorPrefab.transform.position = screenPosition; 
     }
@@ -55,7 +63,7 @@ public class UI_Rig : MonoBehaviour
 
     private void SetUIText(Rig rig)
     {
-        clockSpeed.text = $"{(string)rig.clockSpeed}qHz";
+        clockSpeed.text = $"{(string)rig.clockSpeed}<sup>Q</sup>";
         busWidth.text = $"{(string)rig.busWidth}";
     }
 
@@ -64,6 +72,8 @@ public class UI_Rig : MonoBehaviour
         drawCount.text = rig.DrawDeck.Count.ToString();
         handCount.text = rig.Hand.Count.ToString();
         discardCount.text = rig.Discards.Count.ToString();
-        trashCount.text = rig.Trash.Count.ToString(); 
+        trashCount.text = rig.Trash.Count.ToString();
+        linkAmt.text = rig.link;
+        traceLevel.text = rig.trace; 
     }
 }

@@ -8,7 +8,7 @@ using System.Linq;
 
 public class UI_Ice : MonoBehaviour
 {
-    public ICE ice;
+    public ICE ice { get; private set; }
     [SerializeField] TextMeshProUGUI iceName;
     [SerializeField] Image image; 
     [SerializeField] GameObject subArea, subRoutinePrefab;
@@ -29,6 +29,6 @@ public class UI_Ice : MonoBehaviour
             Destroy(t.gameObject);
 
         foreach(Subroutine sub in ice.Subroutines)
-            Instantiate(subRoutinePrefab, subArea.transform).GetComponent<UI_Subroutine>().Setup(ice, sub); 
+            Instantiate(subRoutinePrefab, subArea.transform).GetComponent<UI_Subroutine>().Setup(sub); 
     }
 }

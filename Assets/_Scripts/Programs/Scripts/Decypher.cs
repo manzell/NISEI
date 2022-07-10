@@ -1,29 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events; 
 using System.Linq; 
 
 [CreateAssetMenu(menuName ="Program/ICEBreaker")]
 public class Decypher : Program
 {
-    public enum Style { Breadth, Depth}    
-    public Style approach;
+    enum Style { Breadth, Depth}    
+    public List<ProgramType> Types => types;
+    public floatRef PowerLevel => powerLevel;
 
-    [Range(0f,1f)] public float widthFactor;
+    [SerializeField] Style approach;
+    [SerializeField] List<ProgramType> types = new List<ProgramType>();
+    [SerializeField] floatRef powerLevel;
 
-    public void DecypherICE(ICE ice, Executable exe)
+    [SerializeField] [Range(0f, 1f)] float widthFactor;
+
+    public void DecypherICE(ICE ice, Executable exe, UnityAction callback)
     {
         List<BitType> targetIceTypes = new List<BitType>();
-
-        foreach (ProgramType type in programTypes)
-            targetIceTypes.AddRange(type.targetBitTypes);
-
         List<Bit> addressableBits = new List<Bit>();
+        int power = (int)(PowerLevel * ServerManager.currentRig.clockSpeed);
+
+        foreach (ProgramType type in types)
+            targetIceTypes.AddRange(type.targetBitTypes);
 
         foreach (Subroutine sub in ice.Subroutines)
             addressableBits.AddRange(sub.bits.Where(bit => bit.decrypted == false && targetIceTypes.Contains(bit.bitType)));
-
-        int power = (int)(powerLevel * ServerManager.currentRig.clockSpeed);
 
         if (addressableBits.Count > 0)
         {
@@ -31,6 +35,7 @@ public class Decypher : Program
 
             int numBitsAddressed = Mathf.Min((int)(power / factor), addressableBits.Count);
             int attemptsPerBit = power / numBitsAddressed;
+            int maxDepthGuess = (int)Mathf.Pow(PowerLevel + 1, 2); 
 
             if (approach == Style.Depth)
             {
@@ -39,7 +44,7 @@ public class Decypher : Program
                 numBitsAddressed -= attemptsPerBit;
             }
             
-            Debug.Log($"|{exe.Name}>{exe.cycles} :: {numBitsAddressed}x{attemptsPerBit} bitfield address");
+            Debug.Log($"{exe.Name}>{exe.cycles} :: {numBitsAddressed}({addressableBits.Count})x{attemptsPerBit}::{maxDepthGuess} bitfield address");
 
             for (int i = 0; i < numBitsAddressed; i++)
             {
@@ -47,8 +52,7 @@ public class Decypher : Program
 
                 for (int n = 0; n < attemptsPerBit; n++)
                 {
-                    int max = (int)Mathf.Min(Mathf.Pow(powerLevel + 1, 2), bit.depth);
-                    int guess = Random.Range(0, max);
+                    int guess = Random.Range(0, Mathf.Min(maxDepthGuess, bit.depth));
 
                     if (bit.TryDecrypt(guess))
                     {
@@ -64,15 +68,17 @@ public class Decypher : Program
         {
             Debug.Log($"|{exe.Name}>No crackable bits on {ice.name}> Decryption ending"); 
         }
+
+        callback?.Invoke(); 
     }
 
-    public override Executable GetExecutable(Program program)
+    public override Executable GetExecutable()
     {
         ICE ice = ServerManager.currentIce; 
+        Executable exe = new Executable(ExecutionCost);
 
-        Executable exe = new Executable(executable => DecypherICE(ice, executable));
-        exe.cycles = program.ExecutionCost;
-        exe.Name = $"{program.name}({ice.name})";
+        exe.Set(callback => DecypherICE(ice, exe, callback)); 
+        exe.Name = $"{name}({ice.name})";
         exe.Desc = $"Cycles: {(string)exe.cycles}";
 
         return exe; 

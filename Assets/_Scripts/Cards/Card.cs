@@ -6,7 +6,11 @@ using UnityEngine;
 public class Card : ScriptableObject
 {
     public new string name;
-    public string description; 
+    public string description;
+
+    public intRef PlayCost => playCost;
+    public intRef DrawCost => drawCost; 
+
     [SerializeField] protected intRef playCost, drawCost;
     [SerializeField] protected List<PlayBehavior> playBehaviors; 
     [SerializeField] protected PlayBehavior discardBehavior, trashBehavior, drawBehavior, flushBehavior;
@@ -30,12 +34,15 @@ public class Card : ScriptableObject
     }
 
     protected virtual bool CanPlay(Rig rig) => rig.cycles >= playCost; 
-    public void Try(Rig rig)
+    public bool Try(Rig rig)
     {
-        if (CanPlay(rig))
+        bool can = CanPlay(rig); 
+        if (can)
             Play(rig);
         else
             Debug.Log($"Cannot play {name}");
+
+        return can; 
     }
 
     public int GetDrawCost() => (int)drawCost.Value;

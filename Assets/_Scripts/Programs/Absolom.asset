@@ -13,23 +13,28 @@ MonoBehaviour:
   m_Name: Absolom
   m_EditorClassIdentifier: 
   name: Absolom
+  description: Icebreaker * Decoder
   version: --x-x--
-  programTypes:
-  - {fileID: 11400000, guid: 0f8e52169c22d774b83ab6e6b75514eb, type: 2}
-  powerLevel:
-    constant: 1
-    constValue: 1
-    floatValue: {fileID: 0}
   memoryCost:
     constant: 1
     constValue: 1
     intValue: {fileID: 0}
-  executionCost:
+  execCost:
     constant: 1
     constValue: 1
+    intValue: {fileID: 0}
+  installCost:
+    constant: 1
+    constValue: 5
     intValue: {fileID: 0}
   installBehavior: {fileID: 0}
   uninstallBehavior: {fileID: 0}
   prefab: {fileID: 0}
   approach: 0
+  types:
+  - {fileID: 11400000, guid: 0f8e52169c22d774b83ab6e6b75514eb, type: 2}
+  powerLevel:
+    constant: 1
+    constValue: 1
+    floatValue: {fileID: 0}
   widthFactor: 1

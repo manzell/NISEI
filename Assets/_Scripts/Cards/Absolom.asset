@@ -9,22 +9,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de822dfde917d9e47a088c699e61cb36, type: 3}
+  m_Script: {fileID: 11500000, guid: 4eda6962d0716bf438ad321f10bb1938, type: 3}
   m_Name: Absolom
   m_EditorClassIdentifier: 
-  name: Install Absolom
-  description: Icebreaker; Decoder
+  name: 
+  description: 
   playCost:
     constant: 1
-    constValue: 5
+    constValue: 6
     intValue: {fileID: 0}
   drawCost:
     constant: 1
-    constValue: 4
+    constValue: 2
     intValue: {fileID: 0}
-  playBehaviors:
-  - {fileID: 11400000, guid: 183cf60e077bb2f40be11c8e702e7982, type: 2}
+  playBehaviors: []
   discardBehavior: {fileID: 0}
   trashBehavior: {fileID: 0}
   drawBehavior: {fileID: 0}
   flushBehavior: {fileID: 0}
+  program: {fileID: 11400000, guid: cacb4d63e087cfc4b894bd454b641af2, type: 2}

@@ -12,7 +12,15 @@ public class InstallCard : Card
 
     protected override void Play(Rig rig)
     {
+        FindObjectOfType<UI_Debug>().SetMessage($"{program.name} installed"); 
         rig.InstallProgram(program); 
         base.Play(rig);
+    }
+
+    private void OnEnable()
+    {
+        description = program.description;
+        name = program.name;
+        playCost = program.InstallCost;
     }
 }

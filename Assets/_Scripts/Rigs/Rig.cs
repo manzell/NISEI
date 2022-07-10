@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement; 
 using UnityEngine.Events; 
 using System.Linq;
 
@@ -9,9 +10,8 @@ public class Rig : ScriptableObject
 {
     public new string name; 
     public intRef memory;
-    public int AvailableMemory => (int)memory.Value - Programs.Sum(program => program.MemoryCost);
-    public intRef busWidth;
-    public intRef clockSpeed;
+    public intRef busWidth, clockSpeed, link, trace;
+    public int AvailableMemory=> (int)memory.Value - Programs.Sum(program => program.MemoryCost);
     public int cycles { get; private set; } = 0; 
     
     public List<Executable> ExecutionStack { get; private set; } = new List<Executable>();     
@@ -20,6 +20,8 @@ public class Rig : ScriptableObject
     public List<Card> DrawDeck { get; private set; } = new List<Card>();
     public List<Card> Discards { get; private set; } = new List<Card>();
     public List<Card> Trash { get; private set; } = new List<Card>();
+
+    [SerializeField] Scene runSummaryScene; 
 
     [SerializeField] List<Card> startingCards = new List<Card>();
     [SerializeField] List<Program> startingPrograms = new List<Program>(); 
@@ -45,13 +47,16 @@ public class Rig : ScriptableObject
     public void Boot()
     {
         Debug.Log($"{name} Booting...");
-        ServerManager.turnStartEvent.AddListener(DrawUpOnTurnStart);
-        ServerManager.turnEndEvent.AddListener(DiscardHandOnTurnEnd);
 
         CreateStartingDrawDeck();
-        RunStartupBehaviors();
         InstallStartingPrograms();
+        RunStartupBehaviors();
 
+        ServerManager.turnStartEvent.AddListener(DrawUpOnTurnStart);
+        ServerManager.turnStartEvent.AddListener(ResetAvailableCycles);
+        ServerManager.turnEndEvent.AddListener(DiscardHandOnTurnEnd);
+        ServerManager.failedRunEvent.AddListener(OnRunEnd);
+        ServerManager.successfulRunEvent.AddListener(OnRunEnd);
         ServerManager.turnStartEvent.Invoke();
     }
 
@@ -62,6 +67,7 @@ public class Rig : ScriptableObject
     }
 
     /* RIG */
+    void ResetAvailableCycles() => cycles = Mathf.Min(clockSpeed, cycles + clockSpeed); 
     public void ChargeCycles(int c) => cycles -= c;
     public void ChargeCycles(intRef c) => cycles -= c;
 
@@ -82,22 +88,19 @@ public class Rig : ScriptableObject
 
     public void ExecuteStack()
     {
-        List<Executable> dequeList = new List<Executable>(); 
-
-        for(int i = 0; i < ExecutionStack.Count; i++)
+        if (ExecutionStack.Count > 0)
         {
-            Executable exe = ExecutionStack[i];
-
-            //TODO: Charge cycles
+            Executable exe = ExecutionStack.First();
+            ExecutionStack.Remove(exe);
+            exe.SetCallback(ExecuteStack);
             exe.Execute();
-            executeEvent.Invoke(exe);
-            dequeList.Add(exe); 
+
+            Dequeue(exe); 
         }
-
-        foreach (Executable exe in dequeList) 
-            Dequeue(exe);
-
-        ServerManager.turnEndEvent.Invoke();
+        else
+        {
+            ServerManager.turnEndEvent.Invoke();
+        }
     }
 
     /* PROGRAMS */
@@ -178,13 +181,13 @@ public class Rig : ScriptableObject
     }
 
     public IEnumerable<Card> GetAllCards() => DrawDeck.Union(Hand).Union(Discards);
-    public Card GetCardByOrder(ModifyCard.Order order, IEnumerable<Card> cards)
+    public Card GetCardByOrder(ModifyCardDrawCost.Order order, IEnumerable<Card> cards)
     {
         switch (order)
         {
-            case ModifyCard.Order.First:
+            case ModifyCardDrawCost.Order.First:
                 return cards.First();
-            case ModifyCard.Order.Last:
+            case ModifyCardDrawCost.Order.Last:
                 return cards.Last();
             default:
                 return cards.OrderBy(card => Random.value).First();
@@ -202,5 +205,12 @@ public class Rig : ScriptableObject
             return "Trash";
         else
             return string.Empty; 
+    }
+
+    /* OTHER */
+
+    void OnRunEnd()
+    {
+        SceneManager.LoadScene(runSummaryScene.ToString()); 
     }
 }

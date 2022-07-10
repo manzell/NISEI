@@ -13,12 +13,6 @@ public class UI_Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler
     [SerializeField] Color hoverBGColor, hoverTextColor, textNormalColor; 
     [SerializeField] RawImage image;
 
-    void Start()
-    {
-        if (card != null) 
-            Setup(card); 
-    }
-
     public void Setup(Card card)
     {
         this.card = card;
@@ -32,8 +26,8 @@ public class UI_Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler
     {
         if(card != null)
         {
-            card.Play();
-            Destroy(gameObject);
+            if(card.Try(ServerManager.currentRig))
+                Destroy(gameObject);
         }
     }
 

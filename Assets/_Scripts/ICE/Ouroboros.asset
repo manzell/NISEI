@@ -15,88 +15,18 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects:
-    - {fileID: 11400000, guid: 61952c0ed2d649b4d848974233073d90, type: 2}
-    - {fileID: 11400000, guid: ccaf9597bb3902948b4cf5c0d89a569e, type: 2}
-    - {fileID: 11400000, guid: f383c03e9051b5f48ba98b9181fe311f, type: 2}
-    - {fileID: 11400000, guid: 86399a65f8a6f954193066b2c594ca4e, type: 2}
+    ReferencedUnityObjects: []
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes:
-    - Name: subroutines
-      Entry: 7
-      Data: 0|System.Collections.Generic.Dictionary`2[[Subroutine, Assembly-CSharp],[System.ValueTuple`3[[BitType,
-        Assembly-CSharp],[System.Int32, mscorlib],[System.Int32, mscorlib]], mscorlib]],
-        mscorlib
-    - Name: comparer
-      Entry: 7
-      Data: 1|System.Collections.Generic.ObjectEqualityComparer`1[[Subroutine, Assembly-CSharp]],
-        mscorlib
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 12
-      Data: 2
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 10
-      Data: 0
-    - Name: $v
-      Entry: 7
-      Data: System.ValueTuple`3[[BitType, Assembly-CSharp],[System.Int32, mscorlib],[System.Int32,
-        mscorlib]], mscorlib
-    - Name: Item1
-      Entry: 10
-      Data: 1
-    - Name: Item2
-      Entry: 3
-      Data: 8
-    - Name: Item3
-      Entry: 3
-      Data: 8
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 10
-      Data: 2
-    - Name: $v
-      Entry: 7
-      Data: System.ValueTuple`3[[BitType, Assembly-CSharp],[System.Int32, mscorlib],[System.Int32,
-        mscorlib]], mscorlib
-    - Name: Item1
-      Entry: 10
-      Data: 3
-    - Name: Item2
-      Entry: 3
-      Data: 4
-    - Name: Item3
-      Entry: 3
-      Data: 4
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
+    SerializationNodes: []
   name: Ouroboros
+  subroutines:
+  - {fileID: 11400000, guid: e53728439467c9b498bb1d8cbedfd9a9, type: 2}
+  - {fileID: 11400000, guid: e53728439467c9b498bb1d8cbedfd9a9, type: 2}
+  - {fileID: 11400000, guid: e53728439467c9b498bb1d8cbedfd9a9, type: 2}
+  - {fileID: 11400000, guid: afb2e560131012e4ea59c0d4ccae6831, type: 2}
   sprite: {fileID: 21300000, guid: 090f5a7564d5f5d4daf2d4b22c6e849f, type: 3}
   iceBreakEvent:
     m_PersistentCalls:

@@ -25,12 +25,20 @@ MonoBehaviour:
     constant: 1
     constValue: 10
     intValue: {fileID: 0}
+  link:
+    constant: 1
+    constValue: 5
+    intValue: {fileID: 0}
+  trace:
+    constant: 1
+    constValue: 0
+    intValue: {fileID: 0}
   startingCards:
-  - {fileID: 11400000, guid: 52feabd8e4772ed42b8c884323396c41, type: 2}
-  - {fileID: 11400000, guid: 054af22cd766864458133ddab4a32d3b, type: 2}
   - {fileID: 11400000, guid: ca4fe6c9a5ce42b4481efd72e1bdf22f, type: 2}
   - {fileID: 11400000, guid: 93bfebd79c5c23f46ada912322ddb6a6, type: 2}
-  - {fileID: 11400000, guid: 30c1583cb41d1fa459e0c09aa5b137ea, type: 2}
+  - {fileID: 11400000, guid: 52feabd8e4772ed42b8c884323396c41, type: 2}
+  - {fileID: 11400000, guid: b72f77273da7830478a9c8d83e178377, type: 2}
+  - {fileID: 11400000, guid: a4a93ed1385036f4ea3e5d802bb33af3, type: 2}
   startingPrograms:
   - {fileID: 11400000, guid: 7c1c4f9588e72f3429dd92d30e983dc4, type: 2}
   startupBehaviors: []

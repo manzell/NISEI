@@ -9,6 +9,8 @@ public class ServerManager : MonoBehaviour
     public static ICE currentIce;
     public static Rig currentRig;
 
+    public static int attempts, successes, cycles; 
+
     public static UnityEvent
         gameStartEvent = new UnityEvent(),
         turnStartEvent = new UnityEvent(),
@@ -26,6 +28,7 @@ public class ServerManager : MonoBehaviour
 
     private void Awake()
     {
+        DontDestroyOnLoad(this); 
         currentRig = Instantiate(startingRig);
     }
 
@@ -33,6 +36,7 @@ public class ServerManager : MonoBehaviour
     {
         turnStartEvent.AddListener(SpawnNextIce);
         iceBreakEvent.AddListener(ice => SpawnNextIce());
+        Bit.DecryptEvent.AddListener(() => successes++); 
         currentRig.Boot(); 
     }
 

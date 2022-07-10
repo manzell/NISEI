@@ -11,9 +11,9 @@ public class FloatValue : ScriptableObject
 [System.Serializable]
 public class floatRef : IModifiable
 {
-    public bool constant;
+    public bool constant = true;
     public float constValue;
-    public FloatValue floatValue;
+    public FloatValue floatValue = new FloatValue();
 
     public List<Modifier> modifiers { get; set; } = new List<Modifier>();
 

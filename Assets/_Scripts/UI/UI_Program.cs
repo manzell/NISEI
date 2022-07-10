@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Events; 
+using UnityEngine.Events;
+using UnityEngine.EventSystems;
 using TMPro; 
 
-public class UI_Program : MonoBehaviour
+public class UI_Program : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    public Program program;
+    public Program program { get; private set; }
     [SerializeField] TextMeshProUGUI programName, quickAccess;
     [SerializeField] Button runProgramButton;
     [SerializeField] KeyCode AccessKey;
@@ -29,5 +30,15 @@ public class UI_Program : MonoBehaviour
         
         runProgramButton.onClick.RemoveAllListeners();
         runProgramButton.onClick.AddListener(program.Enqueue); 
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        FindObjectOfType<UI_Debug>().SetMessage(program.description);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        FindObjectOfType<UI_Debug>().SetMessage(string.Empty);
     }
 }

@@ -13,23 +13,28 @@ MonoBehaviour:
   m_Name: Kair0
   m_EditorClassIdentifier: 
   name: Kair0
+  description: Icebreaker * Fracter
   version: 4d21.9
-  programTypes:
-  - {fileID: 11400000, guid: 1e64f4d8989820f43a93128baf5d359b, type: 2}
-  powerLevel:
-    constant: 1
-    constValue: 1
-    floatValue: {fileID: 0}
   memoryCost:
     constant: 1
     constValue: 1
     intValue: {fileID: 0}
-  executionCost:
+  execCost:
     constant: 1
-    constValue: 1
+    constValue: 3
+    intValue: {fileID: 0}
+  installCost:
+    constant: 1
+    constValue: 3
     intValue: {fileID: 0}
   installBehavior: {fileID: 0}
   uninstallBehavior: {fileID: 0}
   prefab: {fileID: 0}
   approach: 0
+  types:
+  - {fileID: 11400000, guid: 1e64f4d8989820f43a93128baf5d359b, type: 2}
+  powerLevel:
+    constant: 1
+    constValue: 1
+    floatValue: {fileID: 0}
   widthFactor: 0

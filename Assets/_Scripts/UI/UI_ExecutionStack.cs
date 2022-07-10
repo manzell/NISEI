@@ -22,7 +22,7 @@ public class UI_ExecutionStack : MonoBehaviour
 
     void UpdateHeading()
     {
-        heading.text = "|Stack> " +
+        heading.text = "Stack> " +
             $"{stackArea.GetComponentsInChildren<UI_Executable>().Sum(_e => _e.Exe.cycles.Value)}/{(string)ServerManager.currentRig.clockSpeed}";
     }
 
@@ -86,6 +86,6 @@ public class UI_ExecutionStack : MonoBehaviour
     void SetExecuteButtonStatus()
     {
         button.interactable = stackArea.transform.childCount > 0;
-        button.GetComponentInChildren<TextMeshProUGUI>().text = button.interactable ? "|EXECUTE>" : "|STACK EMPTY>";
+        button.GetComponentInChildren<TextMeshProUGUI>().text = button.interactable ? "EXECUTE>" : "STACK EMPTY>";
     }
 }

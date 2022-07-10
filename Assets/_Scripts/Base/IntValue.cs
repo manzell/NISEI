@@ -12,7 +12,7 @@ public class IntValue : ScriptableObject
 public class intRef : IModifiable
 {
     public string name => intValue?.name; 
-    public bool constant;
+    public bool constant = true;
     public int constValue;
     public IntValue intValue;
 

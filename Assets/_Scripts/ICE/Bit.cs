@@ -17,26 +17,21 @@ public class Bit
     public static UnityEvent DecryptEvent = new UnityEvent();
     [HideInInspector] public UnityEvent decryptEvent = new UnityEvent();
 
-    ICE ice;
-
-    public Bit(BitType type, ICE ice, int depth)
+    public Bit(BitType type, int depth)
     {
         this.bitType = type; 
-        this.ice = ice;
         this.depth = depth;
         value = Random.Range(0, depth);
     }
 
-    public Bit(ICE ice, int depth)
+    public Bit(int depth)
     {
-        this.ice = ice; 
         this.depth = depth;
         value = Random.Range(0, depth);
     }
 
     public Bit(Bit bit)
     {
-        ice = bit.ice;
         depth = bit.depth;
         bitType = bit.bitType;
         decrypted = bit.decrypted; 
@@ -45,6 +40,8 @@ public class Bit
 
     public virtual bool TryDecrypt(int guessVal)
     {
+        testEvent.Invoke();
+        TestEvent.Invoke(); 
         decrypted = guessVal == value;
 
         if (decrypted)

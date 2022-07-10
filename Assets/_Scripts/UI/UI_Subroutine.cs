@@ -8,11 +8,11 @@ using System.Linq;
 
 public class UI_Subroutine : MonoBehaviour
 {
-    public Subroutine subroutine; 
+    public Subroutine subroutine { get; private set; } 
     [SerializeField] TextMeshProUGUI subName, subDescription;
     [SerializeField] GameObject bitPrefab, bitArea; 
 
-    public void Setup(ICE ice, Subroutine subroutine)
+    public void Setup(Subroutine subroutine)
     {
         this.subroutine = subroutine;
         subName.text = $"{subroutine.name}"; 
